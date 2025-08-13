@@ -38,7 +38,7 @@ It allows showroom owners to manage their inventory, handle customer interaction
 
 ## 🚀 How to Run Locally
 
-```
+
 # 1. Clone the repository
 git clone https://github.com/YourUsername/autobazaar.git
 cd autobazaar
@@ -56,7 +56,7 @@ pip install -r requirements.txt
 # 4. Run the development server
 python manage.py runserver
 
-```
+
 
 <h3 align="center">🏠 Homepage</h3> <p align="center"> <img src="screenshots/homepage1.jpg" alt="Homepage" width="800"/> </p>
 <p align="center"> <img src="screenshots/homepage2.jpg" alt="Homepage" width="800"/> </p>
