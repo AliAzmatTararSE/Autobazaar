@@ -59,23 +59,23 @@ python manage.py runserver
 
 
 <h3 align="center">🏠 Homepage</h3> <p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/homepage1.JPG" alt="Homepage" width="800"/> </p>
-<p align="center"> <img src="screenshots/homepage2.jpg" alt="Homepage" width="800"/> </p>
+<p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/homepage2.JPG" alt="Homepage" width="800"/> </p>
 
-<h3 align="center">ℹ️ About Us Page</h3> <p align="center"> <img src="screenshots/aboutus1.jpg" alt="About Us" width="800"/> </p>
-<p align="center"> <img src="screenshots/aboutus2.jpg" alt="About Us" width="800"/> </p>
+<h3 align="center">ℹ️ About Us Page</h3> <p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/aboutus1.JPG" alt="About Us" width="800"/> </p>
+<p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/aboutus2.JPG" alt="About Us" width="800"/> </p>
 
-<h3 align="center">🚘 Complete Garage</h3> <p align="center"> <img src="screenshots/completegarage1.jpg" alt="Garage" width="800"/> </p> 
-<p align="center"> <img src="screenshots/completegarage2.jpg" alt="Garage" width="800"/> </p> 
+<h3 align="center">🚘 Complete Garage</h3> <p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/completegarage1.JPG" alt="Garage" width="800"/> </p> 
+<p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/completegarage2.JPG" alt="Garage" width="800"/> </p> 
   
-<h3 align="center">📞 Contact Us</h3> <p align="center"> <img src="screenshots/contactus.jpg" alt="Contact Form" width="800"/> </p>
+<h3 align="center">📞 Contact Us</h3> <p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/contactus.JPG" alt="Contact Form" width="800"/> </p>
 
-<h3 align="center">📅 Appointment Form</h3> <p align="center"> <img src="screenshots/appointment.jpg" alt="Appointment Form" width="800"/> </p>
+<h3 align="center">📅 Appointment Form</h3> <p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/appointment.JPG" alt="Appointment Form" width="800"/> </p>
 
-<h3 align="center">🛠 Services Page</h3> <p align="center"> <img src="screenshots/services1.jpg" alt="Services" width="800"/> </p> 
-<p align="center"> <img src="screenshots/services2.jpg" alt="Services" width="800"/> </p> 
+<h3 align="center">🛠 Services Page</h3> <p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/services1.JPG" alt="Services" width="800"/> </p> 
+<p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/services2.JPG" alt="Services" width="800"/> </p> 
 
-<h3 align="center">🆕 Add Car Page</h3> <p align="center"> <img src="screenshots/addcar1.jpg" alt="Add Car" width="800"/> </p>
-<p align="center"> <img src="screenshots/addcar1.jpg" alt="Add Car" width="800"/> </p>
+<h3 align="center">🆕 Add Car Page</h3> <p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/addcar1.JPG" alt="Add Car" width="800"/> </p>
+<p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/addcar1.JPG" alt="Add Car" width="800"/> </p>
 
-<h3 align="center">🗄 Database View</h3> <p align="center"> <img src="screenshots/database1.jpg" alt="Database" width="800"/> </p>
-<p align="center"> <img src="screenshots/database2.jpg" alt="Database" width="800"/> </p>
+<h3 align="center">🗄 Database View</h3> <p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/database1.JPG" alt="Database" width="800"/> </p>
+<p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/database2.JPG" alt="Database" width="800"/> </p>
