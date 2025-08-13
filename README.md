@@ -58,7 +58,7 @@ python manage.py runserver
 
 
 
-<h3 align="center">🏠 Homepage</h3> <p align="center"> <img src="screenshots/homepage1.jpg" alt="Homepage" width="800"/> </p>
+<h3 align="center">🏠 Homepage</h3> <p align="center"> <img src="https://raw.githubusercontent.com/AliAzmatTararSE/Autobazaar/main/static/screenshots/homepage1.jpg" alt="Homepage" width="800"/> </p>
 <p align="center"> <img src="screenshots/homepage2.jpg" alt="Homepage" width="800"/> </p>
 
 <h3 align="center">ℹ️ About Us Page</h3> <p align="center"> <img src="screenshots/aboutus1.jpg" alt="About Us" width="800"/> </p>
