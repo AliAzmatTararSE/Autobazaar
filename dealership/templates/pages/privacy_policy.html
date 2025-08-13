@@ -1,0 +1,161 @@
+{% extends "pages/main.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+
+
+header 
+{
+    background: #333;
+    color: #fff;
+    padding: 1rem;
+    margin-top: 50px;
+    text-align: center;
+}
+
+main {
+    padding: 2rem;
+}
+
+.privacy-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.grid-item {
+    background: #f4f4f4;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+
+</style>
+
+<header>
+    <h1>Privacy Policy</h1>
+</header>
+<main>
+    <section class="privacy-content">
+        <div class="grid-container">
+            <div class="grid-item">
+                <h2>Introduction</h2>
+                <p>Welcome to [Your Company Name]. This Privacy Policy explains how we collect, use, and protect your personal information when you use our website [website URL]. By using our site, you agree to the terms of this Privacy Policy.</p>
+            </div>
+            <div class="grid-item">
+                <h2>Information We Collect</h2>
+                <ul>
+                    <li>Personal Identification Information: Name, email address, phone number, etc.</li>
+                    <li>Transaction Information: Details about purchases or other transactions.</li>
+                    <li>Usage Data: Information about how you use our website, including IP addresses and browsing patterns.</li>
+                </ul>
+            </div>
+            <div class="grid-item">
+                <h2>How We Use Your Information</h2>
+                <ul>
+                    <li>To process transactions and manage orders.</li>
+                    <li>To improve our website and services based on user feedback.</li>
+                    <li>To send promotional emails and updates if you have opted in to receive them.</li>
+                </ul>
+            </div>
+            <div class="grid-item">
+                <h2>How We Protect Your Information</h2>
+                <p>We implement various security measures to protect your personal information. This includes using secure servers, encryption, and access controls to prevent unauthorized access.</p>
+            </div>
+            <div class="grid-item">
+                <h2>Sharing Your Information</h2>
+                <p>We do not sell, trade, or otherwise transfer your personal information to outside parties except as required by law or with your consent.</p>
+            </div>
+            <div class="grid-item">
+                <h2>Your Rights</h2>
+                <ul>
+                    <li>Access: You can request access to your personal information.</li>
+                    <li>Correction: You can request corrections to inaccurate or incomplete information.</li>
+                    <li>Deletion: You can request the deletion of your personal information under certain circumstances.</li>
+                </ul>
+            </div>
+            <div class="grid-item">
+                <h2>Cookies and Tracking Technologies</h2>
+                <p>We use cookies and other tracking technologies to enhance your experience on our site. You can manage your cookie preferences through your browser settings.</p>
+            </div>
+            <div class="grid-item">
+                <h2>Changes to This Privacy Policy</h2>
+                <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page, and your continued use of our site constitutes acceptance of the revised policy. Please review this policy periodically.</p>
+            </div>
+            <div class="grid-item">
+                <h2>Contact Us</h2>
+                <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+                <address>
+                    <p>[Your Company Name]</p>
+                    <p>[Address]</p>
+                    <p>Email: <a href="mailto:[Email Address]">[Email Address]</a></p>
+                    <p>Phone: [Phone Number]</p>
+                </address>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    // scripts.js
+
+// Create a button element
+const scrollToTopButton = document.createElement('button');
+scrollToTopButton.textContent = 'Scroll to Top';
+scrollToTopButton.classList.add('scroll-to-top');
+document.body.appendChild(scrollToTopButton);
+
+// Show button when scrolled down
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 200) {
+        scrollToTopButton.style.display = 'block';
+    } else {
+        scrollToTopButton.style.display = 'none';
+    }
+});
+
+// Scroll to top functionality
+scrollToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+</script>
+
+{% endblock %}

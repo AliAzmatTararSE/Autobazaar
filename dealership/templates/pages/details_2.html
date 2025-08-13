@@ -1,0 +1,390 @@
+{% extends 'pages/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/details.css' %}">
+<style>
+    h2 {
+        color: white;
+    }
+
+    .image-display-section {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .main-image-box {
+        width: 66%;
+        position: relative;
+        padding: 0; /* Removed padding to allow the image to cover the full box */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+        background-color: #fff;
+        border-radius: 15px; /* Rounded corners */
+        height: 500px; /* Set the height of the box */
+        overflow: hidden; /* Ensure content doesn't overflow */
+    }
+
+    .main-image-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 15px; /* Ensures the image fits the rounded corners */
+    }
+
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .arrow:hover {
+        background-color: rgba(0, 0, 0, 1);
+    }
+
+    .arrow-left {
+        left: 0;
+    }
+
+    .arrow-right {
+        right: 0;
+    }
+
+    .thumbnails-box-outer {
+        width: 32%;
+        padding: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+        background-color: #fff;
+        border-radius: 15px; /* Rounded corners for the outer box */
+        box-sizing: border-box; /* Ensure padding doesn't affect size */
+        overflow: hidden; /* Clip any content that overflows */
+    }
+
+    .thumbnails-box {
+        max-height: 480px; /* Set a max height */
+        overflow-y: auto; /* Enable vertical scrolling */
+        margin-right: -10px; /* Adjust margin for scroll bar if necessary */
+        padding-right: 10px; /* Compensate for the scrollbar */
+        box-sizing: content-box; /* Ensure content is not clipped within the box */
+    }
+
+    .thumbnails-box img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+        margin-bottom: 10px;
+        cursor: pointer;
+        border-radius: 10px; /* Optional: round corners of thumbnails */
+    }
+
+    .thumbnails-box img:hover {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+    }
+
+    .details-section {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .details-box, .empty-box {
+        width: 32%;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+        background-color: #fff;
+        height: auto;
+        margin-bottom: 30px;
+        border-radius: 15px; /* Rounded corners */
+    }
+    .video-box {
+        width: 32%;
+        padding: 0; /* Remove padding to allow the video to take the full width and height */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+        background-color: #fff;
+        height: auto;
+        margin-bottom: 30px;
+        border-radius: 15px; /* Rounded corners */
+        overflow: hidden; /* Ensure the video doesn't overflow the box */
+    }
+
+    .video-box video {
+        width: 100%;
+        height: 100%; /* Make the video take up the full height of the box */
+        object-fit: cover;
+        border-radius: 15px; /* Rounded corners for the video */
+        display: block;
+    }
+
+    .no-video-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%; /* Full height of the video box */
+        color: #666; /* You can change the color to whatever suits your design */
+        font-size: 18px; /* Adjust the size as needed */
+        font-weight: bold; /* Make the text bold if desired */
+        text-align: center;
+        border-radius: 15px; /* Ensures the text box has the same rounded corners as the video box */
+        background-color: #f9f9f9; /* Optional: light background to differentiate from the rest of the page */
+    }
+
+
+    .details-text h5 
+    {
+        margin-top: 0;
+    }
+
+
+
+    .details-text p {
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        white-space: nowrap; /* Prevent text from wrapping */
+    }
+
+    .details-text p b {
+        flex: 1; /* Labels take up 1 part of the available space */
+    }
+
+    .details-text p span {
+        flex: 1; /* Values take up the other part of the available space */
+        text-align: right; /* Align the values to the right */
+        white-space: nowrap; /* Prevent text from wrapping */
+        overflow: hidden; /* Hide overflow text */
+        text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    }
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    /* Image Display Section */
+    .image-display-section {
+        flex-direction: column; /* Stack main image and thumbnails vertically */
+    }
+
+    /* Main Image Box */
+    .main-image-box {
+        width: 100%;
+        height: auto; /* Allow height to adjust based on image aspect ratio */
+        margin-bottom: 10px; /* Add some space below the main image */
+    }
+
+    .main-image-box img {
+        width: 100%;
+        height: auto; /* Maintain aspect ratio */
+        object-fit: contain; /* Ensure the entire image is visible without cropping */
+    }
+
+    /* Thumbnails Box Outer */
+    .thumbnails-box-outer {
+        width: 100%;
+        padding: 0; /* Remove padding to fit thumbnails nicely */
+        display: flex;
+        justify-content: center; /* Center the thumbnails horizontally */
+        align-items: center; /* Center the thumbnails vertically within the box */
+        overflow: hidden; /* Hide any overflow */
+    }
+
+    /* Thumbnails Box */
+    .thumbnails-box {
+        display: flex;
+        justify-content: start; /* Start aligning from the left */
+        align-items: center; /* Align thumbnails vertically within the box */
+        overflow-x: auto; /* Enable horizontal scrolling */
+        overflow-y: hidden; /* Hide vertical overflow */
+        padding: 0; /* No padding inside thumbnail box */
+        gap: 5px; /* Space between thumbnails */
+        box-sizing: border-box;
+    }
+
+    .thumbnails-box img {
+        margin-top: 8px;
+        width: 24%; /* Adjust width for four thumbnails in a row */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    /* Ensure no clipping */
+    .thumbnails-box img:first-child {
+        margin-left: 5px; /* Add margin to ensure first image isn't clipped */
+    }
+
+    .thumbnails-box img:last-child {
+        margin-right: 5px; /* Add margin to ensure last image isn't clipped */
+    }
+
+    /* Details Section */
+    .details-box, .empty-box, .video-box {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .details-section {
+        flex-direction: column;
+    }
+}
+
+
+</style>
+
+<div class="individualCar">
+    <h2>Car Details</h2>
+</div>
+
+<div class="container">
+    <!-- Image Display Section -->
+    <div class="image-display-section">
+        <!-- Main Image Box -->
+        <div class="main-image-box">
+            <img id="mainImage" src="{{ car.images.first.image.url }}" alt="{{ car.model }}">
+            <div class="arrow arrow-left" onclick="prevImage()">&#10094;</div>
+            <div class="arrow arrow-right" onclick="nextImage()">&#10095;</div>
+        </div>
+
+        <!-- Thumbnails Box -->
+        <div class="thumbnails-box-outer">
+            <div class="thumbnails-box">
+                {% for image in car.images.all %}
+                <img src="{{ image.image.url }}" onclick="selectImage({{ forloop.counter0 }})" data-index="{{ forloop.counter0 }}" alt="{{ car.model }}">
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Three Boxes Below the Image Display Section -->
+    <div class="details-section">
+        <!-- Car Details Box -->
+        <div class="details-box">
+            <div class="details-text">
+                <h5 class="card-title"><b>{{ car.name }}</b></h5>
+                <hr>
+                <p class="card-text"><b>Model No</b><span>{{ car.year }}</span></p>
+                <hr>
+                <p class="card-text"><b>Mileage</b><span>{{ car.mileage }} km</span></p>
+                <hr>
+                <p class="card-text"><b>Color</b><span>{{ car.color }}</span></p>
+                <hr>
+                <p class="card-text"><b>Company</b><span>{{ car.company }}</span></p>
+                <hr>
+                <p class="card-text"><b>Type</b><span>{{ car.car_type }}</span></p>
+                <hr>
+                <p class="card-text"><strong class="formatted-price" data-price="{{ car.price }}">PKR {{ car.price }}</strong></p>
+            </div>
+            
+        </div>
+        
+        <!-- Empty Box -->
+        <div class="empty-box">
+            <!-- This box is intentionally left empty -->
+            <div class="details-text">
+                <h5><b>Description</b></h5>
+                <p class="card-text">
+                    
+                    <hr>
+                   
+                    {{ car.description }}
+                </p>
+            </div>
+            <div class="details-text">
+                <br><br>
+                <p class="card-text">
+                    <br>
+                    03445228348
+                </p>
+            </div>
+        </div>
+
+        <!-- Car Video Box -->
+        {% if car.video %}
+        <div class="video-box">
+            <video width="600" controls>
+                <source src="{{ car.video.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        {% else %}
+        <div class="video-box">
+            <div class="no-video-text">
+                <p>No video available</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Include Bootstrap JS (CDN) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Custom JavaScript for image swiping and thumbnail click -->
+<script>
+
+
+    
+
+
+
+    let currentIndex = 0;
+    const images = Array.from(document.querySelectorAll('.thumbnails-box img'));
+
+    function showImage(index) {
+        const mainImage = document.getElementById('mainImage');
+        mainImage.src = images[index].src;
+        currentIndex = index;
+    }
+
+    function prevImage() {
+        const prevIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+        showImage(prevIndex);
+    }
+
+    function nextImage() {
+        const nextIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+        showImage(nextIndex);
+    }
+
+    function selectImage(index) {
+        showImage(index);
+    }
+
+    // Initialize the main image as the first one
+    document.addEventListener('DOMContentLoaded', () => {
+        showImage(0);
+    });
+
+    function formatIndianNumber(number) {
+        let numStr = number.toString();
+        let [integerPart, decimalPart] = numStr.split('.');
+        // Format integer part
+        let lastThreeDigits = integerPart.slice(-3);
+        let remainingDigits = integerPart.slice(0, -3);
+        if (remainingDigits) {
+            remainingDigits = remainingDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+            return remainingDigits + ',' + lastThreeDigits + (decimalPart ? '.' + decimalPart : '');
+        } else {
+            return lastThreeDigits + (decimalPart ? '.' + decimalPart : '');
+        }
+    }
+    
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        let priceElements = document.querySelectorAll('.formatted-price');
+        priceElements.forEach(function(element) {
+            let number = element.getAttribute('data-price');
+            element.textContent = `PKR ${formatIndianNumber(number)}`;
+        });
+
+    });
+
+
+
+</script>
+
+{% endblock content %}

@@ -1,0 +1,504 @@
+{% extends 'pages/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+.hero-section {
+    position: relative;
+    z-index: 1;
+    margin-top: 50px;
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    color: white;
+    text-align: center;
+}
+
+/* Overlay styles */
+.hero-section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Black overlay with 70% opacity */
+    z-index: 2;
+}
+
+/* Container styles */
+.hero-section .container {
+    position: relative;
+    z-index: 3;
+}
+
+
+
+
+    /* Styles for the service boxes */
+    .service_section .box {
+        border: 1px solid #ddd;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 1);
+        background-color: #fff;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .service_section .box:hover {
+        background-color: orange;
+        color: #fff;
+    }
+
+  .service_section .box .detail-box h5,
+  .service_section .box .detail-box p {
+      transition: color 0.3s ease;
+  }
+
+  .service_section .box:hover .detail-box h5,
+  .service_section .box:hover .detail-box p {
+      color: #fff;
+  }
+
+/* Style for the images inside the boxes */
+.service_section .box .img-box img {
+    max-width: 100px;
+    margin-bottom: 10px;
+}
+
+/* Ensuring the service boxes have some margin between them */
+.service_section .col-sm-6.col-md-4.mx-auto {
+    margin-bottom: 30px;
+}
+
+/* Style for the images inside the boxes */
+.service_section .box .img-box {
+    margin-bottom: 10px;
+}
+
+.service_section .box .img-box img {
+    max-width: 80px; /* Adjust this size as needed */
+    display: inline-block;
+}
+
+/* Additional styling to ensure hover effects */
+.service_section .box:hover .img-box img {
+    filter: brightness(0) invert(1); /* This makes the icon turn white on hover */
+}
+
+.service-section {
+    display: flex;
+    justify-content: space-between;
+    background-color: #002366; /* Dark blue background */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    color: white; /* White text color */
+   
+}
+
+.service-box {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    margin: 0 10px;
+    background-color: #0039a6; /* Slightly lighter blue for each box */
+    border-radius: 10px;
+}
+
+.icon img {
+    width: 50px;
+    margin-bottom: 15px;
+}
+
+h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+  p {
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+
+  .appointment-btn, .call-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: orange; /* Yellow button */
+      color: #002366; /* Dark blue text */
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+  }
+
+  .appointment-btn:hover, .call-btn:hover {
+      background-color: #e6b800; /* Slightly darker yellow on hover */
+      color: white;
+  }
+
+
+/* content like aboutus page */
+
+.bigContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        
+    }
+
+    .bigContainer.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .Container {
+        display: flex;
+        margin-top:20px;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+        margin-bottom: 60px;
+
+    }
+
+    .mainImg {
+        max-width: 50%;
+        border-radius: 10px;
+    }
+
+    .allText {
+        max-width: 50%;
+        margin-left:20px;
+    }
+
+    .headingText {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .subHeadingText {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .description {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+
+
+    .explore:hover {
+        background-color: #e04e4e;
+    }
+
+    .image-left .mainImg {
+        order: 1;
+    }
+
+    .image-left .allText {
+        order: 2;
+        padding-left: 20px;
+       
+    }
+
+    .image-right .mainImg {
+        order: 2;
+    }
+
+    .image-right .allText {
+        order: 1;
+        padding-right: 20px;
+        padding-left: 0;
+    }
+
+
+
+
+
+/* Media query for tablets and small screens */
+@media only screen and (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0; /* Reduce padding for smaller screens */
+        background-size: cover; /* Keep background size consistent */
+    }
+
+    .hero-section .container h1 {
+        font-size: 36px; /* Reduce font size of the main heading */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Adjust text shadow for readability */
+    }
+
+    .hero-section .container h4 {
+        font-size: 20px; /* Reduce font size of the subheading */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Adjust text shadow for readability */
+    }
+
+    .service-section {
+        flex-direction: column; /* Stack service boxes vertically on smaller screens */
+        padding: 15px; /* Reduce padding */
+    }
+
+    .service-box {
+        margin: 10px 0; /* Adjust margins for stacked layout */
+    }
+
+    .icon img {
+        width: 40px; /* Reduce icon size */
+    }
+
+    h3 {
+        font-size: 18px; /* Reduce heading font size */
+    }
+
+    p {
+        font-size: 14px; /* Reduce paragraph font size */
+    }
+
+    .appointment-btn, .call-btn {
+        padding: 8px 15px; /* Adjust button size */
+        font-size: 14px; /* Adjust font size */
+    }
+
+
+     
+    
+   
+
+
+        .hero-section {
+        padding: 60px 0; /* Reduce padding */
+       }
+
+    .hero-section .container h1 {
+        font-size: 36px; /* Reduce font size */
+    }
+
+    .hero-section .container h4 {
+        font-size: 20px; /* Reduce font size */
+    }
+
+    .Container {
+        flex-direction: column;
+        align-items: center;
+        margin-top:30px; 
+        width: 90%; /* Adjust the width to make space on the sides */
+    }
+
+    .mainImg {
+        max-width: 100%;
+        margin-bottom: 20px; /* Add some space between image and text */
+    }
+
+    .allText {
+        max-width: 100%;
+        text-align: left;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    /* Ensure both image-left and image-right follow the same structure in mobile view */
+    .image-left, .image-right {
+        flex-direction: column;
+    }
+
+    /* Ensure the image always comes first */
+    .image-left .mainImg, .image-right .mainImg {
+        order: 1;
+    }
+
+    .image-left .allText, .image-right .allText {
+        order: 2;
+    }
+    .bigContainer, .Container {
+        width: 100%;
+        box-sizing: border-box; /* Ensure padding is included in width calculation */
+    }
+
+    
+
+}
+
+/* Media query for very small screens */
+@media only screen and (max-width: 480px) {
+    .hero-section {
+        padding: 40px 0; /* Further reduce padding for very small screens */
+        background-size: cover; /* Keep background size consistent */
+    }
+
+    .hero-section .container h1 {
+        font-size: 28px; /* Further reduce font size of the main heading */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Adjust text shadow for better readability */
+    }
+
+    .hero-section .container h4 {
+        font-size: 16px; /* Further reduce font size of the subheading */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Adjust text shadow for better readability */
+    }
+
+    .service-section {
+        padding: 10px; /* Further reduce padding */
+    }
+
+    .service-box {
+        padding: 10px; /* Adjust padding */
+        margin: 5px 0; /* Adjust margins for very small screens */
+    }
+
+    .icon img {
+        width: 50px; 
+        height:50px;/* Further reduce icon size */
+    }
+
+    h3 {
+        font-size: 20px; /* Further reduce heading font size */
+    }
+
+    p {
+        font-size: 16px; /* Further reduce paragraph font size */
+    }
+
+    .appointment-btn, .call-btn {
+        padding: 6px 12px; /* Further adjust button size */
+        font-size: 16px; /* Further adjust font size */
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-section {
+        padding: 40px 0; /* Reduce padding to make the section more compact */
+        background-size: cover; /* Keep the background covering the area */
+    }
+
+    .hero-main-heading {
+        font-size: 18px; /* Reduce the font size of the main heading */
+    }
+
+    .hero-sub-heading {
+        font-size: 18px; /* Reduce the font size of the subheading */
+    }
+
+    .hero-section .container {
+        padding: 0 15px; /* Add some horizontal padding to prevent text from touching edges */
+    }
+}
+
+
+</style>
+
+<section class="hero-section" style="background-image: url('{% static 'images/services_logo/background_1.webp' %}'); background-size: cover; background-position: center; padding: 100px 0; color: white; text-align: center;">
+    <div class="overlay"></div>
+    <div class="container">
+        <h1 style="font-size: 48px; font-weight: bold; text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);">We Drive Your Satisfaction</h1>
+        <h4 style="font-size: 28px; font-weight: bold; text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);">
+            Delivering precision in every repair and care in every service.
+            <br>
+           
+             Your trusted partner for all automotive needs.
+        </h4>
+        
+    </div>
+</section>
+
+<div style="margin-top: 30px;"></div>
+
+<div class="service-section">
+    <div class="service-box">
+        <div class="icon">
+            <img src="{% static 'images/services_logo/schedule.png' %}" alt="Phone Icon"> <!-- Replace with your icon source -->
+        </div>
+        <h3>Make An Appointment</h3>
+        <p>Choose a preferred date and time for the appointment that suits you best.</p>
+        <a href="/appointment" class="appointment-btn">BOOK AN APPOINTMENT</a>
+    </div>
+    <div class="service-box">
+        <div class="icon">
+            <img src="{% static 'images/services_logo/clock.png' %}" alt="Clock Icon"> <!-- Replace with your icon source -->
+        </div>
+        <h3>Working Hours</h3>
+        <p>✔ 11:00 AM – 10:00 PM</p>
+        <p>✔ Monday – Sunday</p>
+    </div>
+    <div class="service-box">
+        <div class="icon">
+            <img src="{% static 'images/services_logo/call.png' %}" alt="Call Icon"> <!-- Replace with your icon source -->
+        </div>
+        <h3>Call Now</h3>
+        <p>+92 318 1144183</p>
+        <a href="tel:+923181144183" class="call-btn">CALL NOW</a>
+    </div>
+</div>
+<br>
+<section class="service_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+           
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-4 mx-auto">
+                <div class="box">
+                    <div class="img-box">
+                        <!-- Maintenance Icon -->
+                        <img src="{% static 'images/services_logo/maintenance.png' %}" alt="Maintenance Icon" />
+                    </div>
+                    <div class="detail-box">
+                        <h5> Car Maintenance</h5>
+                        <p>when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 mx-auto">
+                <div class="box">
+                    <div class="img-box">
+                        <!-- Electrical Icon -->
+                        <img src="{% static 'images/services_logo/detailing.png' %}" alt="Electrical Icon" />
+                    </div>
+                    <div class="detail-box">
+                        <h5> Car Detailing</h5>
+                        <p>when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 mx-auto">
+                <div class="box">
+                    <div class="img-box">
+                        <!-- Plumbing Icon -->
+                        <img src="{% static 'images/services_logo/registration.png' %}" alt="Plumbing Icon" />
+                    </div>
+                    <div class="detail-box">
+                        <h5> Car Registration</h5>
+                        <p>when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal</p>
+                    </div>
+                </div>
+            </div>
+        </div>     
+    </div>
+</section>
+
+
+<div class="responsive-container-block bigContainer image-left"></div>
+    <div class="responsive-container-block Container">
+        <img class="mainImg" src="{% static 'images/aboutUs/aboutUs_mission.jpg' %}" alt="Mission">
+        <div class="allText aboveText">
+            <p class="text-blk headingText">From Sales to Service, We’ve Got You Covered</p>
+            <p class="text-blk subHeadingText"></p>
+            <p class="text-blk description">
+                At [Your Company Name], we pride ourselves on delivering exceptional car services tailored to meet all your automotive needs. Whether you're in the market for a new or used vehicle, our extensive inventory and knowledgeable staff are here to help you find the perfect match. Our commitment to quality extends beyond sales—we offer comprehensive maintenance services to keep your vehicle running smoothly. From routine check-ups to more specialized repairs, our skilled technicians use the latest tools and techniques to ensure your car remains in top condition. Trust us to provide reliable service and expert care for all your automotive requirements.
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,1283 @@
+{% extends 'pages/main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+
+<style>
+    h1, h3 {
+        color: Black;
+        font-size:25px;
+    }
+
+    .carousel-item {
+        position: relative;
+    }
+
+    .carousel-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7); /* Black overlay with 70% opacity */
+        z-index: 1;
+    }
+
+    .carousel-caption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        z-index: 2;
+        text-align: center;
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: 300px; /* Reduced height to 300px */
+        object-fit: cover; /* Ensure the image covers the specified dimensions without distortion */
+        border-radius: 15px;
+    }
+
+    .carousel-inner {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    
+
+    .carousel {
+        margin-top:40px;
+        margin-bottom: 30px; /* Add some space below the carousel */
+        
+    }
+
+/* Rounded corners for all dropdowns and input fields */
+.input-group .form-control {
+    text-shadow: none; /* Remove any text shadow */
+    font-size: 16px; /* Adjust font size if necessary */
+    padding: 5px; /* Adjust padding if necessary */
+    border-radius: 4px; /* Rounded corners on all sides */
+    border-color: #0039a6; /* Adjust border color */
+    width: 30%; /* Ensure equal width across inputs */
+}
+
+/* Ensure button has rounded corners */
+.input-group .btn {
+    font-size: 16px; /* Adjust font size if necessary */
+    padding: 5px 10px; /* Adjust padding to center text */
+    border-radius: 4px; /* Rounded corners on all sides */
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    height: 38px; /* Ensure consistent height */
+}
+
+/* Search bar container styling */
+.search-bar-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Ensure inputs are spaced and have rounded corners */
+.input-group {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Add space between form controls to avoid overlapping borders */
+.input-group .form-control {
+    width: 30%; /* Adjust width as needed */
+    margin-right: 10px; /* Space between inputs */
+    border-radius: 4px; /* Rounded corners for all inputs */
+    border-color: #033491;
+}
+
+.input-group .form-control:last-child {
+    margin-right: 0; /* Remove margin for the last input */
+}
+
+.input-group .btn {
+    width: 100px; /* Adjust width as needed */
+    height: 38px; /* Ensure consistent height */
+    border-radius: 4px; /* Rounded corners for the button */
+}
+
+
+
+    /* Updated styles for consistent box sizes and hover effect */
+    .company-box {
+        width: 110%; /* Ensure the box takes full width of its column */
+        height: 120px; /* Set a consistent height for all boxes */
+        
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        box-shadow:0px 4px 6px rgba(0, 0, 0, 1);
+    }
+    
+    .company-box img {
+        max-width: 80%;
+        max-height: 80%; /* Ensure the image scales well within the box */
+        object-fit: contain; /* Ensure the entire image is visible without cropping */
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    .company-box:hover {
+        background-color: rgba(0, 0, 0, 0.4);/* Slightly darken the background on hover */
+    }
+    
+    .company-box:hover img {
+        transform: scale(1.05); /* Slight zoom effect on hover */
+    }
+    
+    .container .row {
+        margin-top: 20px;
+    }
+    
+
+    .card {
+        height: 90%; /* Ensure the card takes full height */
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        position: relative; /* Added for positioning Add # */
+        text-decoration: none; /* Remove underline from links */
+       
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 1); /* Add shadow here */
+       
+        margin: 20px auto; 
+        border-width: 1px;
+        
+        border-color:black;
+    }
+
+    .card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .card-image {
+        height: 300px; /* Set a fixed height for the image container */
+        overflow: hidden; /* Hide any overflow from the image */
+    }
+
+    .card-img-top {
+        width: 100%; /* Set the width to 100% of the parent */
+        height: 100%; /* Set the height to 100% of the parent container */
+        object-fit: cover; /* Ensure the image covers the specified dimensions without distortion */
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover .card-img-top {
+        transform: scale(1.1); /* Zoom-in effect */
+    }
+
+    .card:hover .card-body {
+        color: white;
+    }
+
+    .card:hover {
+        background-color: rgba(0, 0, 0, 0.5); /* Darken background on hover */
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .card-title {
+        margin-bottom: 2px; /* Adjust this value if needed */
+    }
+
+    .card-text {
+        margin-bottom: 2px; /* Adjust this value if needed */
+    }
+
+    .btn-primary {
+        align-self: flex-end;
+         /* Ensure the button aligns to the bottom */
+    }
+
+    .btn-primary:hover {
+        background-color: #00308F;
+    }
+
+    .col-md-4 {
+        margin-bottom: 20px; /* Add space between columns of cards */
+    }
+
+    .add-number {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+    }
+
+    .card-link {
+        color: inherit; /* Inherit color to remove default link color */
+        text-decoration: none; /* Remove underline from links */
+    }
+
+    .card-link:hover {
+        text-decoration: none; /* Prevent underline on hover */
+        color:white;
+    }
+
+
+   /* General container styling */
+.container-wrapper {
+    text-align: center; /* Center align the caption and container */
+    margin-bottom: 20px; 
+}
+
+.caption_1 {
+    font-size: 24px; /* Adjust font size for the caption */
+    font-weight: bold;
+    margin-bottom: 20px; /* Space between caption and container */
+    color: #333; /* Caption text color */
+}
+
+.container_1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between bars reduced */
+    align-items: flex-end; /* Align bars to the bottom */
+    padding: 100px; /* Reduced padding */
+    border: 4px solid #ddd; /* Border around the container */
+    border-radius: 10px; /* Rounded corners for the container */
+    background-color: #fff; /* Background color of the container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1); /* Subtle shadow around the container */
+    width: 80%; /* Set width to 80% */
+    max-width: 1200px; /* Ensure responsiveness with a max-width */
+    margin: 0 auto;
+}
+
+/* Bar Styling */
+.bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30px; /* Width for the bars */
+    position: relative;
+    padding-bottom: 60px; /* Space for company name */
+}
+
+.bar-fill {
+    background-color: #003ada;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 0; /* Start with height 0 for animation */
+    transition: height 1s ease-out; /* Smooth transition */
+    border-radius: 10px 10px 0 0; /* Rounded top corners */
+}
+
+.label {
+    margin-top: 5px; /* Space above the label */
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    font-size: 11px;
+    bottom: -50px; /* Position the label below the bar */
+    width: 100%; /* Ensure the label spans the full width of the bar */
+}
+
+.percentage {
+    position: absolute;
+    bottom: -30px; /* Space for percentage above the label */
+    width: 80%; /* Ensure the percentage spans the full width of the bar */
+    text-align: center;
+}
+    
+
+h1 {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.services {
+    background-color: #ffffff;
+    padding: 40px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    margin: 20px 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for the boxes */
+    gap: 20px;
+}
+
+.grid-item {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grid-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.grid-item h2 {
+    font-size: 22px;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.grid-item p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+
+.bar {
+    width: 25px; /* Allow bars to adjust based on the grid */
+    padding-bottom: 40px; /* Space for company name */
+    position: relative; /* Relative positioning to place labels and percentages */
+}
+
+.bar-fill {
+    height: 100%; /* Ensure bar fill covers the full height based on percentage */
+    position: relative;
+}
+
+.percentage {
+    position: absolute;
+    bottom: 100%; /* Position percentage just above the bar */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px; /* Adjust font size as needed */
+    white-space: nowrap;
+}
+
+.label {
+    position: absolute;
+    bottom: 10px; /* Move the label closer to the bar */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px; /* Adjust font size as needed */
+    white-space: nowrap;
+}
+
+
+
+.grid-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        
+    }
+
+    .grid-item {
+        width: 100%; /* Ensure that the boxes take 90% of the container width */
+        max-width: 400px; 
+        height: 450px;
+    }
+
+
+/* Mobile view adjustments */
+@media only screen and (max-width: 767px) {
+    .carousel-item img {
+        height: 200px; /* Keep the height reduced for mobile screens */
+    }
+
+    .carousel-caption {
+        font-size: 14px; /* Smaller font size for captions on mobile */
+        top: 50%; /* Adjusted position */
+        left: 50%;
+        transform: translate(-50%, -50%); /* Center and move the text up a bit */
+        width: 90%; /* Allow caption to cover more area of the carousel image */
+        padding: 10px 20px; /* Increase padding for better readability */
+       
+        border-radius: 8px; /* Slight rounding of the caption background edges */
+    }
+
+    .carousel-caption h2 {
+        font-size: 18px; /* Adjust heading size to fit well */
+        margin-bottom: 8px;
+        white-space: nowrap; /* Prevents h2 text from wrapping to a new line */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Adds ellipsis if the text is too long */
+    }
+
+    .carousel-caption p {
+        font-size: 14px; /* Slightly larger paragraph size for better readability */
+        margin-bottom: 0;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        z-index: 10; /* Increase z-index if necessary */
+        position: absolute; /* Ensure they are positioned correctly */
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 20px; /* Reduce size of the carousel arrows */
+        height: 20px;
+    }
+
+    .carousel-indicators li {
+        width: 8px; /* Reduce size of the indicators */
+        height: 8px;
+        background-color: rgba(255, 255, 255, 0.5); /* Slightly less opaque */
+    }
+
+    .carousel-indicators .active {
+        background-color: white; /* Highlight the active indicator */
+    }
+
+    h1 {
+        font-size: 20px; /* Adjust the font size to your preference */
+        line-height: 1.2; /* Adjust line height for better readability */
+        margin: 15px 0; /* Adjust margin for spacing */
+    }
+
+    /* Adjust the input fields and button in the search bar */
+    .input-group .form-control {
+        font-size: 14px; /* Reduce the font size for mobile */
+        padding: 8px; /* Adjust padding for better fit */
+        width: 32%; /* Make sure all fields fit in one line */
+        margin-right: 5px; /* Adjust the spacing between fields */
+    }
+
+    /* Adjust the last input field to have no right margin */
+    .input-group .form-control:last-child {
+        margin-right: 0;
+    }
+
+    /* Adjust the search button */
+    .input-group .btn {
+        font-size: 14px; /* Reduce the font size */
+        padding: 5px 10px; /* Adjust padding */
+        width: 100px; /* Adjust button width if needed */
+        height: 36px; /* Adjust button height */
+    }
+
+    /* Ensure the search bar container is properly aligned */
+    .search-bar-container {
+        padding: 0 15px; /* Add some padding to avoid the content touching the screen edges */
+        margin-bottom: 10px;
+    }
+
+    .col-md-2 {
+        flex: 0 0 33.33%; /* 100% / 6 = 16.66% */
+        max-width: 33.33%;
+        padding: 3px; /* Adjust the padding to make sure the boxes fit well */
+    }
+
+    .company-box {
+        width: 95%; /* Ensure the box takes full width of its column */
+        height: 50px; /* Adjust height if needed */
+        margin-bottom: 7px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 1);
+    }
+    
+    .company-box img {
+        max-width: 70%;
+        max-height: 70%;
+    }
+
+    .container .row {
+        margin-top: 3px; /* Reduce the top margin of rows */
+        
+    }
+    
+    .container_1 {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Two rows with 6 columns each */
+    gap: 20px; /* Space between bars */
+    padding: 10px; /* Reduce padding to decrease height */
+
+    width: 100%; /* Keep the width the same */
+    max-width: none; /* Remove the max-width limitation */
+
+    margin: 0 auto;
+    height: auto; /* Set the height to auto to allow content to expand */
+    min-height: 300px; /* Reduce the minimum height */}
+    
+    .grid-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .grid-item {
+        width: 100%; /* Ensure that the boxes take 90% of the container width */
+        max-width: 400px; /* Optional max-width to prevent it from stretching too far */
+    }
+
+
+
+}
+
+@media (max-width: 360px) {
+    .input-group {
+        flex-direction: column; /* Stack items vertically */
+        width: 100%; /* Take full width */
+    }
+
+    .input-group .form-control {
+        width: 100%; /* Full width for dropdowns and input */
+        margin-bottom: 10px; /* Space between fields */
+        margin-right: 0; /* Remove right margin for stacked items */
+    }
+
+    .input-group .btn {
+        width: 50%; /* Full width for search button */
+        margin:0 auto;
+       
+    }
+
+    .card {
+        width: 100%; /* Slightly more width on very small screens */
+        margin: 10px auto;
+    }
+
+    .card-image {
+        height: 180px; /* Further reduce image height for smaller screens */
+    }
+
+    .card-title, .card-text {
+        font-size: 13px; /* Smaller font for extra small screens */
+    }
+
+    .btn-primary {
+        font-size: 12px;
+        padding: 6px 10px; /* Adjust button padding */
+    }
+
+
+    .caption_1 {
+        font-size: 18px; /* Reduce font size of the caption */
+    }
+
+    /* Adjust container padding */
+    .container_1 {
+        padding: 20px; /* Reduce padding inside the container */
+        width: 100%; /* Make the container use full width */
+        max-width: 100%; /* Ensure it does not exceed the screen width */
+    }
+
+    /* Reduce bar width */
+    .bar {
+        width: 20px; /* Reduce bar width */
+        padding-bottom: 10px; /* Adjust space for company names */
+    }
+
+    /* Adjust percentage text positioning */
+    .percentage {
+        bottom: 100%; /* Adjust percentage positioning */
+        font-size: 10px; /* Reduce percentage font size */
+    }
+
+    /* Adjust bar fill and height */
+    .bar-fill {
+        border-radius: 5px 5px 0 0; /* Adjust rounded corners */
+    }
+
+    /* Reduce label font size */
+    .label {
+        font-size: 9px; /* Reduce font size of labels under bars */
+        bottom: -15px; /* Adjust label position */
+    }
+
+    .grid-item {
+        max-width: 400px; /* Increase the width of the grid item */
+       height:450px;
+       margin-left:-30px;
+       margin-right:-30px;
+
+    }
+
+    h1 {
+        font-size: 20px; /* Reduce the size of the main heading */
+    }
+
+   .grid-container .grid-item h2 {
+        font-size: 16px; /* Reduce the size of the grid item headings */
+    }
+
+    .grid-container .grid-item p {
+        font-size: 14px; /* Reduce the font size for better readability */
+        line-height: 1.4; /* Adjust the line height for smaller text */
+        max-width: 300px;
+    }
+
+    
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1024px) and (-webkit-device-pixel-ratio: 1.5), /* for older iPads and tablets */
+only screen and (min-width: 768px) and (max-width: 1024px) and (-webkit-device-pixel-ratio: 2) /* for newer iPads and higher-density tablets */ {
+  /* Styles for iPads and similar devices with 2x pixel density */
+
+  .carousel-item img {
+        height: 200px; /* Keep the height reduced for mobile screens */
+    }
+
+    .carousel-caption {
+        font-size: 14px; /* Smaller font size for captions on mobile */
+        top: 50%; /* Adjusted position */
+        left: 50%;
+        transform: translate(-50%, -50%); /* Center and move the text up a bit */
+        width: 90%; /* Allow caption to cover more area of the carousel image */
+        padding: 10px 20px; /* Increase padding for better readability */
+       
+        border-radius: 8px; /* Slight rounding of the caption background edges */
+    }
+
+    .carousel-caption h2 {
+        font-size: 18px; /* Adjust heading size to fit well */
+        margin-bottom: 8px;
+        white-space: nowrap; /* Prevents h2 text from wrapping to a new line */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Adds ellipsis if the text is too long */
+    }
+
+    .carousel-caption p {
+        font-size: 14px; /* Slightly larger paragraph size for better readability */
+        margin-bottom: 0;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        z-index: 10; /* Increase z-index if necessary */
+        position: absolute; /* Ensure they are positioned correctly */
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 20px; /* Reduce size of the carousel arrows */
+        height: 20px;
+    }
+
+    .carousel-indicators li {
+        width: 8px; /* Reduce size of the indicators */
+        height: 8px;
+        background-color: rgba(255, 255, 255, 0.5); /* Slightly less opaque */
+    }
+
+    .carousel-indicators .active {
+        background-color: white; /* Highlight the active indicator */
+    }
+
+    h1 {
+        font-size: 20px; /* Adjust the font size to your preference */
+        line-height: 1.2; /* Adjust line height for better readability */
+        margin: 15px 0; /* Adjust margin for spacing */
+    }
+
+    /* Adjust the input fields and button in the search bar */
+    .input-group .form-control {
+        font-size: 14px; /* Reduce the font size for mobile */
+        padding: 8px; /* Adjust padding for better fit */
+        width: 32%; /* Make sure all fields fit in one line */
+        margin-right: 5px; /* Adjust the spacing between fields */
+    }
+
+    /* Adjust the last input field to have no right margin */
+    .input-group .form-control:last-child {
+        margin-right: 0;
+    }
+
+    /* Adjust the search button */
+    .input-group .btn {
+        font-size: 14px; /* Reduce the font size */
+        padding: 5px 10px; /* Adjust padding */
+        width: 100px; /* Adjust button width if needed */
+        height: 36px; /* Adjust button height */
+    }
+
+    /* Ensure the search bar container is properly aligned */
+    .search-bar-container {
+        padding: 0 15px; /* Add some padding to avoid the content touching the screen edges */
+        margin-bottom: 10px;
+    }
+
+    .col-md-2 {
+        flex: 0 0 16.66%; /* 100% / 6 = 16.66% */
+        max-width: 16.66%;
+        padding: 3px; /* Adjust the padding to make sure the boxes fit well */
+    }
+
+    .company-box {
+        width: 95%; /* Ensure the box takes full width of its column */
+        height: 50px; /* Adjust height if needed */
+        margin-bottom: 7px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 1);
+    }
+    
+    .company-box img {
+        max-width: 70%;
+        max-height: 70%;
+    }
+   
+
+    .container .row {
+        margin-top: 20px;
+    }
+
+    .col-md-4 {
+        flex: 0 0 33.333%; /* Make cards take one-third of the width */
+        max-width: 33.333%; /* Ensure they don't exceed one-third */
+        padding: 10px; /* Add some padding to space out cards */
+    }
+
+    .card {
+        height: auto; /* Allow the card to adjust its height */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 1);
+        margin: 10px 0;
+        border-width: 1px;
+        border-color: black;
+    }
+
+    .card-image {
+        height: 220px; /* Reduce the image height for better scaling on tablets */
+        overflow: hidden;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .btn-primary {
+        align-self: flex-end;
+    }
+
+    .add-number {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+    }
+
+    
+    .container_1 {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Two rows with 6 columns each */
+    gap: 20px; /* Space between bars */
+    padding: 10px; /* Reduce padding to decrease height */
+
+    width: 100%; /* Keep the width the same */
+    max-width: none; /* Remove the max-width limitation */
+
+    margin: 0 auto;
+    height: auto; /* Set the height to auto to allow content to expand */
+    min-height: 300px; /* Reduce the minimum height */}
+    
+    .grid-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .grid-item {
+        width: 100%; /* Ensure that the boxes take 90% of the container width */
+        max-width: 400px; /* Optional max-width to prevent it from stretching too far */
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+</style>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'images/m5.jpg' %}" class="d-block w-100" alt="First slide">
+            <div class="carousel-overlay"></div> <!-- Added overlay -->
+            <div class="carousel-caption">
+                <h2>Find Your Perfect Car</h2>
+                <p>Explore a wide range of vehicles that match your lifestyle.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'images/m5_2.jpg' %}" class="d-block w-100" alt="Second slide">
+            <div class="carousel-overlay"></div> <!-- Added overlay -->
+            <div class="carousel-caption">
+                <h2>Quality and Reliability</h2>
+                <p>Discover cars that are built to last and perform.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'images/m5_3.jpg' %}" class="d-block w-100" alt="Third slide">
+            <div class="carousel-overlay"></div> <!-- Added overlay -->
+            <div class="carousel-caption">
+                <h2>Drive Your Dreams</h2>
+                <p>Find the vehicle that you've always wanted to own.</p>
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<center><h1>Welcome to Autobazaar, where your journey to finding the perfect vehicle begins!</h1></center>
+
+<div class="search-bar-container">
+    <form id="carSearchForm"  action="{% url 'filter_cars' %}" method="GET">
+        <div class="input-group">
+            <!-- Dropdown 1 -->
+            <select class="form-control" id="dropdown1" name="brand" onchange="hideDropdownPlaceholder(this)">
+                <option value="" selected> Brand</option>
+                <option value="Honda">Honda</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Nissan">Nissan</option>
+                <option value="Suzuki">Suzuki</option>
+                <option value="Audi">Audi</option>
+                <option value="BMW">BMW</option>
+                <option value="Mercedes">Mercedes</option>
+                <option value="KIA">KIA</option>
+                <option value="MG">MG</option>
+                <option value="Hyundai">Hyundai</option>
+                <option value="Changan">Changan</option>
+                <option value="Haval">Haval</option>
+            </select>
+
+            <!-- Dropdown 2 -->
+            <select class="form-control" id="dropdown2" name="year" onchange="hideDropdownPlaceholder(this)">
+                <option value="" selected>Year</option>
+                <!-- Options for years from 1990 to 2024 -->
+                <!-- (Options have been trimmed for brevity) -->
+                
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+                <option value="2014">2014</option>
+                <option value="2013">2013</option>
+                <option value="2012">2012</option>
+                <option value="2011">2011</option>
+                <option value="2010">2010</option>
+                <option value="2009">2009</option>
+                <option value="2008">2008</option>
+                <option value="2007">2007</option>
+                <option value="2006">2006</option>
+                <option value="2005">2005</option>
+                <option value="2004">2004</option>
+                <option value="2003">2003</option>
+                <option value="2002">2002</option>
+                <option value="2001">2001</option>
+                <option value="2000">2000</option>
+                <option value="1999">1999</option>
+                <option value="1998">1998</option>
+                <option value="1997">1997</option>
+                <option value="1996">1996</option>
+                <option value="1995">1995</option>
+                <option value="1994">1994</option>
+                <option value="1993">1993</option>
+                <option value="1992">1992</option>
+                <option value="1991">1991</option>
+                <option value="1990">1990</option>
+            </select>
+
+            <!-- Dropdown 3 -->
+            <input type="number" class="form-control" id="price" name="price" placeholder="Price" min="500000" max="200000000" step="10000"
+                   onfocus="hidePlaceholder(this)" onblur="showPlaceholder(this)" />
+
+            <!-- Search Button -->
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit"><div class="text">Search</div></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <a href="{% url 'cars_by_company' company_name='Honda' %}" class="company-box">
+                <img src="{% static 'images/company_logos/honda_2.png' %}" alt="Honda Logo">
+            </a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'cars_by_company' company_name='Toyota' %}" class="company-box">
+                <img src="{% static 'images/company_logos/toyota.png' %}" alt="Toyota Logo">
+            </a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'cars_by_company' company_name='Suzuki' %}" class="company-box">
+                <img src="{% static 'images/company_logos/suzuki.png' %}" alt="Suzuki Logo">
+            </a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'cars_by_company' company_name='Nissan' %}" class="company-box">
+                <img src="{% static 'images/company_logos/nissan.png' %}" alt="Nissan Logo">
+            </a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'cars_by_company' company_name='Mercedes' %}" class="company-box">
+                <img src="{% static 'images/company_logos/mercedes.png' %}" alt="Mercedes Logo">
+            </a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'cars_by_company' company_name='BMW' %}" class="company-box">
+                <img src="{% static 'images/company_logos/bmw.png' %}" alt="BMW Logo">
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <a href="{% url 'cars_by_company' company_name='Audi' %}" class="company-box">
+                <img src="{% static 'images/company_logos/audi.png' %}" alt="Audi Logo">
+            </a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'cars_by_company' company_name='Haval' %}" class="company-box">
+                <img src="{% static 'images/company_logos/haval.png' %}" alt="Haval Logo">
+            </a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'cars_by_company' company_name='Kia' %}" class="company-box">
+                <img src="{% static 'images/company_logos/kia_2.png' %}" alt="Kia Logo">
+            </a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'cars_by_company' company_name='MG' %}" class="company-box">
+                <img src="{% static 'images/company_logos/mg.png' %}" alt="MG Logo">
+            </a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'cars_by_company' company_name='Changan' %}" class="company-box">
+                <img src="{% static 'images/company_logos/changan.png' %}" alt="Changan Logo">
+            </a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'cars_by_company' company_name='Huyandai' %}" class="company-box">
+                <img src="{% static 'images/company_logos/Huyundai_2.png' %}" alt="Huyundai Logo">
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<h3 >Premium Cars</h3>
+
+<div class="container">
+    <div class="row">
+        {% for car in cars %}
+        <div class="col-md-4">
+            <a href="{% url 'details' car.id %}" class="card-link"> <!-- Card wrapper -->
+                <div class="card mb-4">
+                    <div class="card-image">
+                        <img src="{{ car.image.url }}" class="card-img-top" alt="{{ car.name }}">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ car.name }}</h5>
+                        <hr>
+                        <p class="card-text"><b>{{ car.year }}</b> &nbsp;&nbsp; |&nbsp;&nbsp; <b>{{car.mileage}}&nbsp;km</b>&nbsp;&nbsp; | &nbsp;&nbsp;<b>{{car.color}}</b></p>
+                        <hr>
+                        <p class="card-text"><strong class="formatted-price" data-price="{{ car.price }}">PKR {{ car.price }}</strong></p>
+                        <hr>
+                        <a href="{% url 'details' car.id %}" class="btn btn-primary">View Details</a>
+                        <span class="add-number">Add #{{ forloop.counter }}</span> <!-- Add Number -->
+                        <!-- The 'View Details' button is no longer necessary since the whole card is clickable -->
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p>No cars available at the moment.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!--Bar Html-->  
+
+
+<div class="container-wrapper">
+    <div class="caption_1">Car Sales by Company</div>
+    <div class="container_1">
+        <div class="bar" id="bar1">
+            <div class="bar-fill" id="fill1"></div>
+            <span class="percentage" id="percent1"></span>
+            <span class="label">Honda</span>
+        </div>
+        <div class="bar" id="bar2">
+            <div class="bar-fill" id="fill2"></div>
+            <span class="percentage" id="percent2"></span>
+            <span class="label">Toyota</span>
+        </div>
+        <div class="bar" id="bar3">
+            <div class="bar-fill" id="fill3"></div>
+            <span class="percentage" id="percent3"></span>
+            <span class="label">Suzuki</span>
+        </div>
+        <div class="bar" id="bar4">
+            <div class="bar-fill" id="fill4"></div>
+            <span class="percentage" id="percent4"></span>
+            <span class="label">BMW</span>
+        </div>
+        <div class="bar" id="bar5">
+            <div class="bar-fill" id="fill5"></div>
+            <span class="percentage" id="percent5"></span>
+            <span class="label">Audi</span>
+        </div>
+        <div class="bar" id="bar6">
+            <div class="bar-fill" id="fill6"></div>
+            <span class="percentage" id="percent6"></span>
+            <span class="label">Huyandai</span>
+        </div>
+        <div class="bar" id="bar7">
+            <div class="bar-fill" id="fill7"></div>
+            <span class="percentage" id="percent7"></span>
+            <span class="label">MG</span>
+        </div>
+        <div class="bar" id="bar8">
+            <div class="bar-fill" id="fill8"></div>
+            <span class="percentage" id="percent8"></span>
+            <span class="label">Nissan</span>
+        </div>
+        <div class="bar" id="bar9">
+            <div class="bar-fill" id="fill9"></div>
+            <span class="percentage" id="percent9"></span>
+            <span class="label">Haval</span>
+        </div>
+        <div class="bar" id="bar10">
+            <div class="bar-fill" id="fill10"></div>
+            <span class="percentage" id="percent10"></span>
+            <span class="label">Kia</span>
+        </div>
+        <div class="bar" id="bar11">
+            <div class="bar-fill" id="fill11"></div>
+            <span class="percentage" id="percent11"></span>
+            <span class="label">Changan</span>
+        </div>
+        <div class="bar" id="bar12">
+            <div class="bar-fill" id="fill12"></div>
+            <span class="percentage" id="percent12"></span>
+            <span class="label">Mercedes</span>
+        </div>
+    </div>
+
+    </div>
+    <section class="services">
+        <div class="container">
+            <h1>What We Offer</h1>
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h2>Expert Car Detailing</h2>
+                    <p>When purchasing a used car, it’s crucial to ensure the vehicle is in top condition. Our expert car detailing services provide comprehensive cleaning and protection. We use high-quality products and advanced techniques to ensure that your vehicle not only looks pristine but also maintains its value over time. With thorough inspections and meticulous care, we guarantee a detailed service that rejuvenates and protects your car’s appearance.</p>
+                </div>
+
+                <div class="grid-item">
+                    <h2>Premium Paint Protection Film</h2>
+                    <p>Securing the best protection for your vehicle’s paint is essential for maintaining its aesthetic appeal. Our premium Paint Protection Film (PPF) services offer robust defense against scratches, chips, and UV damage. The high-grade films we use preserve your car’s paintwork and enhance its durability, ensuring it remains in pristine condition and retains its resale value. Trust us to provide top-notch protection that keeps your vehicle looking its best.</p>
+                </div>
+
+                <div class="grid-item">
+                    <h2>Comprehensive Vehicle Maintenance</h2>
+                    <p>Keeping your vehicle in optimal condition requires regular maintenance. We offer a full range of vehicle maintenance services, from routine oil changes to detailed inspections. Our skilled technicians are dedicated to ensuring your car runs smoothly and efficiently. By addressing potential issues early and providing thorough upkeep, we help extend the life of your vehicle and ensure a safe and reliable driving experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<script>
+
+    function formatIndianNumber(number) {
+        let numStr = number.toString();
+        let [integerPart, decimalPart] = numStr.split('.');
+        // Format integer part
+        let lastThreeDigits = integerPart.slice(-3);
+        let remainingDigits = integerPart.slice(0, -3);
+        if (remainingDigits) {
+            remainingDigits = remainingDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+            return remainingDigits + ',' + lastThreeDigits + (decimalPart ? '.' + decimalPart : '');
+        } else {
+            return lastThreeDigits + (decimalPart ? '.' + decimalPart : '');
+        }
+    }
+    
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        let priceElements = document.querySelectorAll('.formatted-price');
+        priceElements.forEach(function(element) {
+            let number = element.getAttribute('data-price');
+            element.textContent = `PKR ${formatIndianNumber(number)}`;
+        });
+
+    });
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('visible');
+            }, index * 500); // 500ms delay between each card
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Percentages for each company
+        const percentages = [5, 10, 8, 12, 7, 6, 9, 15, 11, 4, 13, 5]; // Total should be 100%
+        
+        // Set the maximum height for the bars
+        const maxHeight = 300; // Adjust this value for the maximum height of the bars
+
+        // Function to update bar heights and percentages
+        function updateBars() {
+            percentages.forEach((percentage, index) => {
+                const fillId = `fill${index + 1}`;
+                const percentId = `percent${index + 1}`;
+
+                const fillElement = document.getElementById(fillId);
+                const percentElement = document.getElementById(percentId);
+                
+                // Use a timeout to ensure animation runs every time
+                setTimeout(() => {
+                    fillElement.style.height = `${(percentage / 100) * maxHeight}px`;
+                }, 10); // Small delay to ensure the transition occurs
+
+                percentElement.textContent = `${percentage}%`;
+            });
+        }
+
+        // Initialize bar heights and percentages with animation
+        updateBars();
+    });
+  
+
+  // Function to manage the visibility of the "All" option in dropdowns
+function updateDropdownPlaceholder(select) {
+    const allOption = select.options[0]; // The "All" option
+
+    // Always ensure "All" option is visible
+    if (select.value === "") {
+        allOption.style.display = 'block'; // Show "All" option when no specific value is selected
+    } else {
+        allOption.style.display = 'block'; // Always show "All" option
+    }
+}
+
+// Function to handle placeholder visibility in number input
+function hidePlaceholder(input) {
+    input.placeholder = ""; // Hide the placeholder when input is focused
+}
+
+function showPlaceholder(input) {
+    if (input.value === "") {
+        input.placeholder = "Price"; // Show the placeholder if the input is empty
+    }
+}
+
+// Validate form inputs before submission
+document.getElementById('carSearchForm').addEventListener('submit', function(event) {
+    var brand = document.getElementById('dropdown1').value;
+    var year = document.getElementById('dropdown2').value;
+    var price = document.getElementById('price').value;
+
+    // Check if all fields are empty
+    if (!brand && !year && !price) {
+        event.preventDefault(); // Prevent form submission
+        alert('No input detected. Please select at least one filter option.');
+    }
+});
+
+// Reset dropdowns to default values on page load
+window.onload = function() {
+    const dropdown1 = document.getElementById('dropdown1');
+    const dropdown2 = document.getElementById('dropdown2');
+
+    // Initialize dropdowns to ensure "All" option is visible
+    updateDropdownPlaceholder(dropdown1);
+    updateDropdownPlaceholder(dropdown2);
+
+    // Set the value to "All" if no parameter is present
+    dropdown1.value = "";
+    dropdown2.value = "";
+};
+
+// Update dropdowns on change to reflect the correct "All" option visibility
+document.getElementById('dropdown1').addEventListener('change', function() {
+    updateDropdownPlaceholder(this);
+});
+
+document.getElementById('dropdown2').addEventListener('change', function() {
+    updateDropdownPlaceholder(this);
+});
+
+</script>
+
+
+
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+po0T4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+{% endblock content %}

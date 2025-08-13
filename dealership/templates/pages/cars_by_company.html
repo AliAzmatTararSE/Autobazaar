@@ -1,0 +1,289 @@
+{% extends 'pages/main.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    h2{
+        margin-top:50px;
+        color:black;
+    }
+
+    .col-12{
+        color:black;
+    }
+    .container .row {
+        margin-top: 10px;
+    }
+
+    .card {
+        height: 90%; /* Ensure the card takes full height */
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        position: relative; /* Added for positioning Add # */
+        text-decoration: none; /* Remove underline from links */
+       
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 1); /* Add shadow here */
+       
+        margin: 20px auto; 
+        border-width: 1px;
+        
+        border-color:black;
+    }
+
+    .card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .card-image {
+        height: 300px; /* Set a fixed height for the image container */
+        overflow: hidden; /* Hide any overflow from the image */
+    }
+
+    .card-img-top {
+        width: 100%; /* Set the width to 100% of the parent */
+        height: 100%; /* Set the height to 100% of the parent container */
+        object-fit: cover; /* Ensure the image covers the specified dimensions without distortion */
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover .card-img-top {
+        transform: scale(1.1); /* Zoom-in effect */
+    }
+
+    .card:hover .card-body {
+        color: white;
+    }
+
+    .card:hover {
+        background-color: rgba(0, 0, 0, 0.5); /* Darken background on hover */
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .card-title {
+        margin-bottom: 2px; /* Adjust this value if needed */
+    }
+
+    .card-text {
+        margin-bottom: 2px; /* Adjust this value if needed */
+    }
+
+    .btn-primary {
+        align-self: flex-end;
+         /* Ensure the button aligns to the bottom */
+    }
+
+    .btn-primary:hover {
+        background-color: #00308F;
+    }
+
+    .col-md-4 {
+        margin-bottom: 20px; /* Add space between columns of cards */
+    }
+
+    .add-number {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+    }
+
+    .card-link {
+        color: inherit; /* Inherit color to remove default link color */
+        text-decoration: none; /* Remove underline from links */
+    }
+
+    .card-link:hover {
+        text-decoration: none; /* Prevent underline on hover */
+        color:white;
+    }
+
+    @media only screen and (max-width: 767px){
+
+        h2{
+        font-size: 22px;
+    }
+
+    .card {
+        width: 80%; /* Slightly more width on very small screens */
+        margin: 10px auto;
+    }
+
+    .card-image {
+        height: 280px; /* Further reduce image height for smaller screens */
+    }
+
+    .card-title, .card-text {
+        font-size: 13px; /* Smaller font for extra small screens */
+    }
+
+    .btn-primary {
+        font-size: 12px;
+        padding: 6px 15px;
+        margin-bottom: 8px; /* Adjust button padding */
+    }
+
+
+    }
+
+
+    @media (max-width: 360px){
+    
+    h2{
+        font-size: 22px;
+    }
+
+    .card {
+        width: 100%; /* Slightly more width on very small screens */
+        margin: 10px auto;
+        height:500px;
+    }
+
+    .card-image {
+        height: 280px; /* Further reduce image height for smaller screens */
+    }
+
+    .card-title, .card-text {
+        font-size: 13px; /* Smaller font for extra small screens */
+    }
+
+    .btn-primary {
+        font-size: 12px;
+        padding: 6px 15px;
+        margin-bottom: 8px; /* Adjust button padding */
+    }
+    .col-md-4{
+        margin-bottom:-10px;
+    }
+
+}
+    
+
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+    /* Your CSS styles for iPhone X go here */
+
+    h2{
+        font-size: 22px;
+    }
+
+    .card {
+        width: 100%; /* Slightly more width on very small screens */
+        margin: 10px auto;
+        height:500px;
+    }
+
+    .card-image {
+        height: 280px; /* Further reduce image height for smaller screens */
+    }
+
+    .card-title, .card-text {
+        font-size: 13px; /* Smaller font for extra small screens */
+    }
+
+    .btn-primary {
+        font-size: 12px;
+        padding: 6px 15px;
+        margin-bottom: 8px; /* Adjust button padding */
+    }
+    .col-md-4{
+        margin-bottom:-10px;
+    }
+
+}
+
+
+
+</style>
+
+
+
+<h2>{{ company_name }} Cars</h2>
+
+<div class="row">
+    {% for car in cars_by_company %}
+    <div class="col-md-4">
+        <a href="{% url 'details_2' car.id %}" class="card-link">
+        <div class="card mb-4 ">
+            <div class="card-image">
+                <img src="{{ car.image.url }}" class="card-img-top" alt="{{ car.name }}">
+            </div>
+            
+            <div class="card-body">
+                <h5 class="card-title">{{ car.name }}</h5>
+                <hr>
+                <p class="card-text"><b>{{ car.year }}</b> &nbsp;&nbsp; |&nbsp;&nbsp; <b>{{car.mileage}}&nbsp;km</b>&nbsp;&nbsp; | &nbsp;&nbsp;<b>{{car.color}}</b></p>
+                <hr>
+                <p class="card-text"><strong class="formatted-price" data-price="{{ car.price }}">PKR {{ car.price }}</strong></p>
+                <hr>
+                <a href="{% url 'details_2' car.id %}" class="btn btn-primary">View Details</a>
+                <span class="add-number">Add #{{ forloop.counter }}</span>
+            </div>
+        </div>
+    </a>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <p>No cars available at the moment.</p>
+    </div>
+    
+    {% endfor %}
+</div>
+
+
+<script>
+
+
+    function formatIndianNumber(number) {
+        let numStr = number.toString();
+        let [integerPart, decimalPart] = numStr.split('.');
+        // Format integer part
+        let lastThreeDigits = integerPart.slice(-3);
+        let remainingDigits = integerPart.slice(0, -3);
+        if (remainingDigits) {
+            remainingDigits = remainingDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+            return remainingDigits + ',' + lastThreeDigits + (decimalPart ? '.' + decimalPart : '');
+        } else {
+            return lastThreeDigits + (decimalPart ? '.' + decimalPart : '');
+        }
+    }
+    
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        let priceElements = document.querySelectorAll('.formatted-price');
+        priceElements.forEach(function(element) {
+            let number = element.getAttribute('data-price');
+            element.textContent = `PKR ${formatIndianNumber(number)}`;
+        });
+
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('visible');
+            }, index * 500); // 500ms delay between each card
+        });
+    });
+</script>
+
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+po0T4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+{% endblock content%}

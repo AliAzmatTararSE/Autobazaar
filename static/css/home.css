@@ -1,0 +1,29 @@
+
+
+
+.card-img-top{
+  width: 100%; /* Set the width to 100% of the parent */
+  height: 300px; /* Set a fixed height */
+  object-fit: cover; /* Ensure the image covers the specified dimensions without distortion */
+}
+
+
+h1{
+    color:white;
+  }
+
+
+/* home.css */
+
+.card {
+  height: 450px; /* Adjust this value as needed */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

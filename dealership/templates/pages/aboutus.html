@@ -1,0 +1,441 @@
+{% extends "pages/main.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .bigContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    }
+
+    .bigContainer.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .Container {
+        display: flex;
+        margin-top:50px;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+        margin-bottom: 10px;
+    }
+
+    .mainImg {
+        max-width: 50%;
+        border-radius: 10px;
+    }
+
+    .allText {
+        max-width: 50%;
+    }
+
+    .headingText {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .subHeadingText {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .description {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+
+
+    .explore:hover {
+        background-color: #e04e4e;
+    }
+
+    .image-left .mainImg {
+        order: 1;
+    }
+
+    .image-left .allText {
+        order: 2;
+        padding-left: 20px;
+    }
+
+    .image-right .mainImg {
+        order: 2;
+    }
+
+    .image-right .allText {
+        order: 1;
+        padding-right: 20px;
+        padding-left: 0;
+    }
+    .team{
+     color:white;
+     margin-bottom: 3rem; /* Adjust the value as needed */
+    }
+    
+    .team-members {
+        display: flex;
+        gap: 1rem;
+        justify-content: center; /* Center align the team members */
+        
+    }
+    
+    .team-member {
+        flex: 1;
+        color:white;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.8); 
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    }
+
+    .team-member img {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        transition: transform 0.3s ease;
+    }
+
+    .team-member:hover img {
+        transform: scale(1.1); /* Zoom-in effect */
+    }
+
+    .team-member:hover {
+        background-color: rgba(0, 0, 0, 0.5); /* Darken background on hover */
+    }
+
+    .team-member:hover h3,
+    .team-member:hover p {
+        color: white; /* Change text color to white on hover */
+    }
+
+
+    @media only screen and (max-width: 768px) {
+    .Container {
+        flex-direction: column;
+        align-items: center;
+        margin-top:30px; 
+        width: 90%; /* Adjust the width to make space on the sides */
+    }
+
+    .mainImg {
+        max-width: 100%;
+        margin-bottom: 20px; /* Add some space between image and text */
+    }
+
+    .allText {
+        max-width: 100%;
+        text-align: left;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    /* Ensure both image-left and image-right follow the same structure in mobile view */
+    .image-left, .image-right {
+        flex-direction: column;
+    }
+
+    /* Ensure the image always comes first */
+    .image-left .mainImg, .image-right .mainImg {
+        order: 1;
+    }
+
+    .image-left .allText, .image-right .allText {
+        order: 2;
+    }
+    .bigContainer, .Container {
+        width: 100%;
+        box-sizing: border-box; /* Ensure padding is included in width calculation */
+    }
+    .team-members {
+    display: flex; /* Use flexbox layout */
+    justify-content: center; /* Center align the team members horizontally */
+    gap: 0.4rem; /* Space between team members */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+.team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8); 
+    padding: 0.3rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    width: 100%; /* Full width of its grid column */
+    max-width: 450px; /* Increased width of the box */
+    height: 140px; /* Decreased height of the box */
+    margin: 0; /* Remove margin to align horizontally */
+}
+
+.team-member img {
+    margin-top:10px;
+    border-radius: 50%;
+    width: 80px; /* Slightly reduced width of image */
+    height: 80px; /* Slightly reduced height of image */
+    transition: transform 0.3s ease;
+}
+
+.team-member h4 {
+    margin-top:5px;
+    font-size: 0.8rem; /* Adjust font size of names */
+    margin-bottom: 0.2rem;
+}
+
+.team-member h6 p {
+    font-size: 0.7rem; /* Adjust font size for roles */
+    margin: 0;
+}
+
+
+   
+}
+
+
+@media only screen and (max-width: 360px) {
+
+    .bigContainer {
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    .Container {
+        width: 95%; /* Use full width of the screen */
+        padding: 10px; /* Adjust padding */
+        box-shadow: none; /* Optional: remove shadow for a cleaner look */
+    }
+
+    .mainImg {
+        max-width: 100%;
+        height: auto; /* Ensure the image scales with the container */
+    }
+
+    .allText {
+        width: 100%; /* Ensure the text container takes full width */
+        text-align: left; /* Keep text alignment consistent */
+    }
+
+    .headingText {
+        font-size: 1.5rem; /* Slightly reduce font size */
+    }
+
+    .description {
+        font-size: 0.9rem; /* Adjust the description font size */
+    }
+    .team-member {
+        max-width: 100%; /* Ensure boxes fit within the screen width */
+        height: auto; /* Allow height to adjust based on content */
+        padding: 0.2rem; /* Adjust padding for smaller screens */
+    }
+
+    .team-member img {
+        width: 60px; /* Reduce image size for smaller screens */
+        height: 60px;
+    }
+
+    .team-member h4 {
+        font-size: 0.7rem; /* Adjust font size of names */
+    }
+
+    .team-member h6 p {
+        font-size: 0.6rem; /* Adjust font size for roles */
+    }
+}
+
+@media only screen and (device-width: 375px) and (-webkit-device-pixel-ratio: 2) {
+  /* Styles for iPhone SE (2nd and 3rd Generations) */
+   
+  .team-member {
+        max-width: 100%; /* Ensure boxes fit within the screen width */
+        height: auto; /* Allow height to adjust based on content */
+        padding: 0.2rem; /* Adjust padding for smaller screens */
+    }
+
+    .team-member img {
+        width: 60px; /* Reduce image size for smaller screens */
+        height: 60px;
+    }
+
+    .team-member h4 {
+        font-size: 0.7rem; /* Adjust font size of names */
+    }
+
+    .team-member h6 p {
+        font-size: 0.6rem; /* Adjust font size for roles */
+    }
+
+
+}
+
+@media only screen and (device-width: 390px) and (device-width: 375px) and (device-height: 812px) and  (device-height: 844px) and (-webkit-device-pixel-ratio: 3) {
+  /* Styles for iPhone 12 Pro */
+  .team-member {
+        max-width: 100%; /* Ensure boxes fit within the screen width */
+        height: auto; /* Allow height to adjust based on content */
+        padding: 0.2rem; /* Adjust padding for smaller screens */
+    }
+
+    .team-member img {
+        width: 60px; /* Reduce image size for smaller screens */
+        height: 60px;
+    }
+
+    .team-member h4 {
+        font-size: 0.7rem; /* Adjust font size of names */
+    }
+
+    .team-member h6 p {
+        font-size: 0.6rem; /* Adjust font size for roles */
+    }
+
+}
+
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+    /* Your CSS styles for iPhone X go here */
+    .team-member {
+        max-width: 100%; /* Ensure boxes fit within the screen width */
+        height: auto; /* Allow height to adjust based on content */
+        padding: 0.2rem; /* Adjust padding for smaller screens */
+    }
+
+    .team-member img {
+        width: 60px; /* Reduce image size for smaller screens */
+        height: 60px;
+    }
+
+    .team-member h4 {
+        font-size: 0.7rem; /* Adjust font size of names */
+    }
+
+    .team-member h6 p {
+        font-size: 0.6rem; /* Adjust font size for roles */
+    }
+
+}
+
+@media only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3){
+    /* for 12 pro */
+    .team-member {
+        max-width: 100%; /* Ensure boxes fit within the screen width */
+        height: auto; /* Allow height to adjust based on content */
+        padding: 0.2rem; /* Adjust padding for smaller screens */
+    }
+
+    .team-member img {
+        width: 60px; /* Reduce image size for smaller screens */
+        height: 60px;
+    }
+
+    .team-member h4 {
+        font-size: 0.7rem; /* Adjust font size of names */
+    }
+
+    .team-member h6 p {
+        font-size: 0.6rem; /* Adjust font size for roles */
+    }
+
+}
+
+
+
+
+
+
+
+</style>
+
+<div class="responsive-container-block bigContainer image-left">
+    <div class="responsive-container-block Container">
+        <img class="mainImg" src="{% static 'images/aboutUs/aboutUs_mission.jpg' %}" alt="Mission">
+        <div class="allText aboveText">
+            <p class="text-blk headingText">Our Mission</p>
+            <p class="text-blk subHeadingText"></p>
+            <p class="text-blk description">
+                At Autobazaar , Our mission is to provide a seamless and enjoyable car buying experience for every customer. We believe that purchasing a car should be exciting, informative, and stress-free. Our dedicated team is committed to understanding your unique needs and guiding you through our extensive selection of vehicles, ensuring you find the right fit for your lifestyle.
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+<div class="responsive-container-block bigContainer image-right">
+    <div class="responsive-container-block Container">
+        <img class="mainImg" src="{% static 'images/aboutUs/vision1.0.webp' %}" alt="Vision">
+        <div class="allText aboveText">
+            <p class="text-blk headingText">Our Vision</p>
+            <p class="text-blk subHeadingText"></p>
+            <p class="text-blk description">
+                Our vision is to redefine the car buying experience by creating a seamless and enjoyable journey for every customer. We aspire to be the leading destination for automotive excellence, where passion for vehicles meets unparalleled customer service. We believe in fostering lasting relationships with our clients, ensuring that every individual drives away not just with a car, but with confidence and satisfaction.
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+<div class="responsive-container-block bigContainer image-left">
+    <div class="responsive-container-block Container">
+        <img class="mainImg" src="{% static 'images/aboutUs/aboutUs_values.jpg' %}" alt="Values">
+        <div class="allText aboveText">
+            <p class="text-blk headingText">Our Values</p>
+          
+            <p class="text-blk description">
+                At Autobazaar , we are guided by our core values of customer commitment, integrity, and quality. We prioritize our customers' needs, ensuring transparency and trust in every interaction. We embrace innovation to enhance the car buying experience while actively engaging with our community and promoting sustainability. Respect and professionalism are at the heart of our operations, allowing us to create a positive environment for both our customers and our team.
+            </p>
+            
+        </div>
+    </div>
+</div>
+<section class="team">
+    <div class="container">
+        <center><h2>Meet the Team</h2></center>
+        <div class="team-members">
+            <div class="team-member">
+                <img src="{% static 'images/team_pics/ali.png' %}" alt="Team Member">
+                <h4>Ali Azmat</h4>
+               <h6> <p>CEO </p></h6>
+            </div>
+            <div class="team-member">
+                <img src="{% static 'images/team_pics/person1.jpeg' %}" alt="Team Member">
+                <h4>Person 2</h4>
+                <h6><p>Founder</p></h6>
+            </div>
+            <div class="team-member">
+                <img src="{% static 'images/team_pics/person3.avif' %}" alt="Team Member">
+                <h4>Person 3</h4>
+                <h6><p>Managing director</p></h6>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const bigContainers = document.querySelectorAll('.bigContainer');
+        bigContainers.forEach((container, index) => {
+            setTimeout(() => {
+                container.classList.add('visible');
+            }, index * 500); // 500ms delay between each container
+        });
+    });
+</script>
+
+{% endblock content %}

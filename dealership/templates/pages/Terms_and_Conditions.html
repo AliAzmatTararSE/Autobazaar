@@ -1,0 +1,167 @@
+{% extends "pages/main.html" %}
+{% load static %}
+
+{% block content %}
+ 
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    margin-top: 50px;
+    padding: 1rem;
+    text-align: center;
+}
+
+main {
+    padding: 2rem;
+}
+
+.terms-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.grid-item {
+    background: #f4f4f4;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+</style>
+
+<header>
+    <h1>Terms and Conditions</h1>
+</header>
+<main>
+    <section class="terms-content">
+        <div class="grid-container">
+            <div class="grid-item">
+                <h2>Introduction</h2>
+                <p>Welcome to [Your Company Name]. By using our website [website URL], you agree to these Terms and Conditions. If you disagree, please refrain from using our site.</p>
+            </div>
+            <div class="grid-item">
+                <h2>Services Offered</h2>
+                <p>We provide a platform for buying and selling cars, including new and pre-owned vehicles, financing options, trade-ins, and maintenance services.</p>
+            </div>
+            <div class="grid-item">
+                <h2>User Responsibilities</h2>
+                <ul>
+                    <li>You must be at least [age] years old to use our website.</li>
+                    <li>If you create an account, you must provide accurate and complete information.</li>
+                    <li>You are responsible for maintaining the confidentiality of your account credentials.</li>
+                    <li>You agree not to engage in activities that could harm our website, such as unauthorized access or spreading malware.</li>
+                </ul>
+            </div>
+            <div class="grid-item">
+                <h2>Vehicle Listings and Transactions</h2>
+                <ul>
+                    <li>We strive to provide accurate information about our vehicles, but details such as price, specifications, and availability may change without notice.</li>
+                    <li>Vehicle purchases require a formal agreement and may involve additional documentation and verification.</li>
+                </ul>
+            </div>
+            <div class="grid-item">
+                <h2>Payment and Fees</h2>
+                <ul>
+                    <li>We accept various payment methods, including credit and debit cards, and financing options. All transactions are processed securely.</li>
+                    <li>Any additional fees, taxes, or charges will be disclosed at the time of purchase. You are responsible for reviewing these fees before completing a transaction.</li>
+                </ul>
+            </div>
+            <div class="grid-item">
+                <h2>Intellectual Property</h2>
+                <ul>
+                    <li>All content on our website, including text, graphics, and images, is owned by [Your Company Name] or its licensors and is protected by intellectual property laws.</li>
+                    <li>Reproduction, distribution, or modification of any content from our site without permission is prohibited.</li>
+                </ul>
+            </div>
+            <div class="grid-item">
+                <h2>Limitation of Liability</h2>
+                <p>[Your Company Name] is not liable for indirect, incidental, or consequential damages related to your use of our website or services. Our liability for any claims related to these Terms will not exceed the amount paid by you for the specific service or product.</p>
+            </div>
+            <div class="grid-item">
+                <h2>Indemnification</h2>
+                <p>You agree to indemnify and hold harmless [Your Company Name] and its affiliates from any claims, liabilities, damages, or expenses arising from your use of our website or violation of these Terms.</p>
+            </div>
+            <div class="grid-item">
+                <h2>Changes to Terms</h2>
+                <p>We may update these Terms periodically. Changes will be posted on our website, and your continued use constitutes acceptance of the revised Terms. Please review these Terms regularly.</p>
+            </div>
+            <div class="grid-item">
+                <h2>Governing Law</h2>
+                <p>These Terms are governed by the laws of [Your State/Country]. Any disputes will be subject to the exclusive jurisdiction of the courts in [Your State/Country].</p>
+            </div>
+            <div class="grid-item">
+                <h2>Contact Information</h2>
+                <p>For any questions about these Terms, contact us at:</p>
+                <address>
+                    <p>[Your Company Name]</p>
+                    <p>[Address]</p>
+                    <p>Email: <a href="mailto:[Email Address]">[Email Address]</a></p>
+                    <p>Phone: [Phone Number]</p>
+                </address>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // scripts.js
+
+// Create a button element
+const scrollToTopButton = document.createElement('button');
+scrollToTopButton.textContent = 'Scroll to Top';
+scrollToTopButton.classList.add('scroll-to-top');
+document.body.appendChild(scrollToTopButton);
+
+// Show button when scrolled down
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 200) {
+        scrollToTopButton.style.display = 'block';
+    } else {
+        scrollToTopButton.style.display = 'none';
+    }
+});
+
+// Scroll to top functionality
+scrollToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+    </script>
+
+{% endblock content %}

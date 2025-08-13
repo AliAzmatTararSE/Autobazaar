@@ -1,0 +1,352 @@
+{% extends "pages/main.html" %}
+{% load static %}
+
+{% block content %}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<style>
+      
+    h2{
+        margin-top: 50px;
+    }
+
+    /* Container holding the form and contact information */
+    .contact-container {
+        display: flex;
+        justify-content: space-between;
+        background-color: rgba(0, 0, 0, 0.9); 
+        opacity:2;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+        margin: 50px auto;
+        max-width: 900px;
+        padding: 30px;
+        color: #fff;
+        margin-top:40px;
+    }
+    
+    /* Styling for the form section */
+    .contact-form {
+        flex: 1;
+        margin-right: 30px;
+    }
+    
+    .contact-form .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .contact-form .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #bbb;
+    }
+    
+    .contact-form .form-group input,
+    .contact-form .form-group textarea {
+        width: 100%;
+        padding: 10px 0; /* Adjust padding to fit a single line */
+        border: none; /* Remove border */
+        border-bottom: 1px solid #555; /* Single line at the bottom */
+        background-color: transparent; /* Transparent background */
+        color: #fff;
+        font-size: 16px;
+    }
+    
+    .contact-form .form-group input:focus,
+    .contact-form .form-group textarea:focus {
+        outline: none;
+        border-bottom: 1px solid #007bff; /* Focus color */
+    }
+    
+    .contact-form .form-group button {
+        width: 40%;
+        padding: 10px;
+        background: orange;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    
+    .contact-form .form-group button:hover {
+        background: #e9651a;
+    }
+    
+    /* Error message styling */
+    .contact-form .error {
+        color: red;
+        font-size: 14px;
+    }
+    
+    /* Styling for the contact information section */
+    .contact-info {
+    flex: 1;
+    padding-left: 30px;
+    border-left: 1px solid #444;
+}
+
+.contact-info h4 {
+    margin-bottom: 20px;
+    font-size: 24px; /* Increase heading size */
+}
+
+.contact-info p {
+    margin-bottom: 8px; /* Add more space between items */
+    font-size: 18px; /* Increase text size */
+}
+
+.contact-info p i {
+    margin-right: 15px; /* Increase space between icon and text */
+    background-color: #555; /* Circle background */
+    border-radius: 50%; /* Make it circular */
+    padding: 15px; /* Increase padding for bigger circle */
+    color: #fff;
+    width: 50px; /* Increase width for larger circle */
+    height: 50px; /* Increase height for larger circle */
+    text-align: center; /* Center icon in the circle */
+    font-size: 24px; /* Increase icon size */
+    line-height: 20px; /* Adjust line height for better icon centering */
+}
+
+    .contact-form .success {
+        color: green;
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    @media (max-width: 768px) {
+    .contact-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center horizontally */
+        justify-content: center; /* Center vertically if necessary */
+        width:100%;
+        padding: 5px;
+        min-height: 100vh; /* Ensure container takes up full viewport height */
+    }
+
+    .contact-form {
+        width: 100%; /* Full width */
+        max-width: 400px; /* Set max width for better appearance */
+        margin: 0 auto; /* Center horizontally */
+        padding: 5px; /* Add padding inside the form */
+        box-sizing: border-box; /* Ensure padding doesn’t affect width */
+    }
+
+  
+
+    .contact-form .form-group button {
+        width: 35%; /* Set button width to 60% */
+        margin: 0 auto; /* Center button */
+        display: block; /* Ensure the button is treated as a block element */
+        font-size: 15px;
+        
+    }
+
+    .contact-info {
+        text-align: left;
+        padding: 0;
+        margin-top: 20px;
+        border-left: none; /* Remove any left border */
+    }
+
+    .contact-info .info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .contact-info .info-item i {
+        margin-right: 15px;
+        font-size: 24px;
+        flex-shrink: 0;
+    }
+
+    .contact-info .info-item p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.6;
+        word-wrap: break-word;
+    }
+
+}
+
+
+@media (max-width: 360px) {
+    h2 {
+        font-size: 22px;
+        margin-bottom:25px; 
+    }
+
+    .contact-form .form-group label {
+        font-size: 14px; /* Reduce label font size */
+    }
+
+    .contact-form .form-group input,
+    .contact-form .form-group textarea {
+        font-size: 14px; /* Reduce input and textarea font size */
+        padding: 8px 0; /* Slightly reduce padding */
+    }
+
+    .contact-form .form-group button {
+        font-size: 14px; /* Reduce button font size */
+    }
+    .contact-info h4{
+        font-size:18px;
+    }
+
+    .contact-info p {
+        display: flex;            /* Use flexbox for alignment */
+        align-items: center;      /* Vertically center the icon and text */
+        font-size: 14px;          /* Adjust text size for smaller screens */
+        margin-bottom: 8px;       /* Keep some spacing between items */
+    }
+
+    .contact-info p i {
+        margin-right: 10px;       /* Reduce space between icon and text */
+        font-size: 18px;          /* Reduce icon size */
+        padding: 10px;            /* Reduce padding for the icon circle */
+        width: 40px;              /* Adjust width for smaller circle */
+        height: 40px;             /* Adjust height for smaller circle */
+        line-height: 18px;        /* Adjust line height */
+    }
+
+    .contact-info p a {
+        font-size: 14px;          /* Adjust font size for the email text */
+        word-break: break-word;   /* Ensure the email text wraps nicely */
+    }
+    .contact-container {
+        width: 100%;       /* Ensure full width */
+        max-width: 100%;    /* Override any max-width limitations */
+        padding: 15px;      /* Add minimal padding */
+        margin: 0 auto;
+        margin-bottom: 15px;   /* Adjust padding inside the main container */
+    }
+    
+}
+
+
+
+
+    
+</style>
+
+
+<center><h2>Contact Us</h2></center>
+
+
+<div class="container">
+    <div class="contact-container">
+        <div class="contact-form">
+            <!-- Success message div -->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="success">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" class="contact-form" id="contactForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name"><b>Name</b></label>
+                    <input type="text" id="name" name="name" required>
+                    <div class="error" id="nameError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="phone"><b>Phone No</b></label>
+                    <input type="text" id="phone" name="phone" required>
+                    <div class="error" id="phoneError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email"><b>Email</b></label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="error" id="emailError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="subject"><b>Subject</b></label>
+                    <input type="text" id="subject" name="subject" required>
+                    <div class="error" id="subjectError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="message"><b>Message</b></label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <div class="error" id="messageError"></div>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="contact-info">
+            <h4>Contact Information</h4>
+            <br>
+            <p><i class="fas fa-map-marker-alt"></i> 19 West 21th Street </p>
+            <br>
+            <p><i class="fas fa-phone"></i> 033348980198 </p>
+            <br>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:aliazmattarar786@gmail.com">autobazaar@gmail.com</a></p>
+            <br>
+            <p><i class="fas fa-globe"></i> autobazaar.com </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        let hasError = false;
+
+        const name = document.getElementById('name');
+        const email = document.getElementById('email');
+        const subject = document.getElementById('subject');
+        const message = document.getElementById('message');
+
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const subjectError = document.getElementById('subjectError');
+        const messageError = document.getElementById('messageError');
+
+        nameError.textContent = '';
+        emailError.textContent = '';
+        subjectError.textContent = '';
+        messageError.textContent = '';
+
+        if (name.value.trim() === '') {
+            nameError.textContent = 'Name is required.';
+            hasError = true;
+        }
+
+        if (email.value.trim() === '') {
+            emailError.textContent = 'Email is required.';
+            hasError = true;
+        } else if (!validateEmail(email.value.trim())) {
+            emailError.textContent = 'Invalid email format.';
+            hasError = true;
+        }
+
+        if (subject.value.trim() === '') {
+            subjectError.textContent = 'Subject is required.';
+            hasError = true;
+        }
+
+        if (message.value.trim() === '') {
+            messageError.textContent = 'Message is required.';
+            hasError = true;
+        }
+
+        if (!hasError) {
+            this.submit();
+        }
+    });
+
+    function validateEmail(email) {
+        const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        return re.test(String(email).toLowerCase());
+    }
+</script>
+
+{% endblock content %}

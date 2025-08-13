@@ -1,0 +1,230 @@
+{% extends "pages/main.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+    h3{
+        margin-top: 40px;
+    }
+
+      .contact-container {
+        display: flex;
+        justify-content: space-between;
+        background-color: rgba(0, 0, 0, 0.9); 
+        opacity:2;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+        margin: 50px auto;
+        max-width: 700px;
+        padding: 30px;
+        color: #fff;
+        margin-top:40px;
+    }
+    
+    /* Styling for the form section */
+    .contact-form {
+       
+        flex: 1;
+        margin-right: 30px;
+    }
+    
+    .contact-form .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .contact-form .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #bbb;
+    }
+    
+    .contact-form .form-group input,
+    .contact-form .form-group textarea {
+        width: 100%;
+        padding: 10px 0; /* Adjust padding to fit a single line */
+        border: none; /* Remove border */
+        border-bottom: 1px solid #555; /* Single line at the bottom */
+        background-color: transparent; /* Transparent background */
+        color: #fff;
+        font-size: 16px;
+    }
+    
+    .contact-form .form-group input:focus,
+    .contact-form .form-group textarea:focus {
+        outline: none;
+        border-bottom: 1px solid #007bff; /* Focus color */
+    }
+    
+    .contact-form .form-group button {
+        width: 40%;
+        padding: 10px;
+        background: orange;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    
+    .contact-form .form-group button:hover {
+        background: #e9651a;
+    }
+    
+    /* Error message styling */
+    .contact-form .error {
+        color: red;
+        font-size: 14px;
+    }
+    .contact-form .success {
+        color: green;
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+   
+    /* Change color of date and time icons to white */
+    input[type="date"]::-webkit-calendar-picker-indicator,
+    input[type="time"]::-webkit-calendar-picker-indicator {
+        filter: invert(100%);
+    }
+    
+    input[type="date"]::-ms-clear,
+    input[type="time"]::-ms-clear {
+        display: none;
+    }
+    
+    input[type="date"]::-ms-expand,
+    input[type="time"]::-ms-expand {
+        display: none;
+    }
+
+    input[type="date"]::-moz-focus-inner,
+    input[type="time"]::-moz-focus-inner {
+        border: 0;
+    }
+
+    input[type="date"],
+    input[type="time"] {
+        color: #fff;
+    }
+
+
+    @media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+        padding: 20px;
+        max-width: 100%;
+        margin: 20px auto;
+    }
+
+    .contact-form {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .contact-form .form-group input,
+    .contact-form .form-group textarea {
+        width: 95%; /* Makes the inputs almost full width */
+    }
+
+    .contact-form .form-group button {
+    width: 50%; /* Reduce button width */
+    display: block; /* Ensure it's treated as a block element */
+    margin: 20px auto; /* Center the button horizontally and add vertical space */
+    padding: 10px;
+    background: orange;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.contact-form .form-group button:hover {
+    background: #e9651a;
+}
+
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    .contact-form .form-group input,
+    .contact-form .form-group textarea {
+        width: 80%; /* Adjusts input width for tablets */
+    }
+}
+
+    
+</style>
+
+<h3>Fill The Form to Book an Appointment</h3>
+
+<div class="container">
+    <div class="contact-container">
+        <div class="contact-form">
+            <!-- Success message div -->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="success">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" class="contact-form" id="contactForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name"><b>Name</b></label>
+                    <input type="text" id="name" name="name" required>
+                    <div class="error" id="nameError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="phone"><b>Phone No</b></label>
+                    <input type="text" id="phone" name="phone" required>
+                    <div class="error" id="phoneError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email"><b>Email</b></label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="error" id="emailError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="date" > Date </label>
+                <input
+                type="date"
+                name="date" 
+                id="date"
+                />
+                </div>
+
+                <div class="form-group">
+                    <label for="time" > Time </label>
+                 <input
+                   type="time"
+                   name="time"
+                   id="time"
+                />
+                </div>
+           
+                <div class="form-group">
+                    <label for="subject"><b>Purpose of Appointment</b></label>
+                    <input type="text" id="subject" name="subject" required>
+                    <div class="error" id="subjectError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="message"><b>Message</b></label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <div class="error" id="messageError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit">Send Message</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}

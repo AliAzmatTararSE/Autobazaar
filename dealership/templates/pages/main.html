@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Showroom</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <!-- FontAwesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+    <style>
+        /* Basic reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        
+        
+
+
+
+        /* Flexbox layout for the body */
+        body {
+            display: flex;
+            flex-direction: column;
+         
+            background-size: cover;
+        }
+
+        /* Ensure the main content area takes up available space */
+        .container {
+            flex: 1;
+        }
+        
+        .navbar{
+            z-index: 1000;
+        }
+
+        .bg-orange {
+            background-color: #0039a6 !important; /* Keeps the background orange */
+        }
+        
+        .navbar-brand, .nav-link, .navbar-toggler-icon, .form-control {
+            color: white !important; /* Makes the text color white for better contrast */
+            text-shadow: 1px 1px 2px black; /* Adds a subtle shadow for better readability */
+        }
+        .navbar-nav .nav-item .nav-link:hover {
+            background-color: orange !important; /* Changes the background color to blue on hover */
+            color: white !important; /* Keeps the text color white */
+            border-radius: 5px; /* Optional: Adds rounded corners to the hover effect */
+        }
+        
+       
+        .dropdown-item:hover {
+            background-color: orange; /* Changes background on hover */
+            color: black; /* Keeps text white on hover */
+        }
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    
+        /* Keeps the dropdown menu hidden by default */
+        .dropdown-menu {
+            display: none;
+            color:black;
+        }
+        
+        /* Optional: Adds a slight delay for hiding the menu */
+        .nav-item.dropdown {
+            position: relative;
+        }
+    
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin: 0;
+        }
+        
+        /* Ensures the dropdown menu is positioned correctly */
+        .dropdown-menu {
+            background-color: white;
+        }
+        
+        /* Additional styles for dropdown items */
+        .dropdown-item {
+            color: black ;
+        }
+    
+        .dropdown-item:hover {
+            background-color: orange !important;
+        }
+
+        .navbar .active-page {
+            background-color: orange;
+        }
+        
+        .form-control {
+            color: black !important; /* Sets the text color inside the search bar to black */
+            background-color: white; /* Ensures the background of the input is white */
+            border-color: rgb(113, 155, 219); /* Keeps the green border */
+        }
+        
+        .form-control::placeholder {
+            color: black; /* Sets the placeholder text color to gray */
+        }
+        
+        .btn-outline-success {
+            color: white !important; /* Keeps the button text white */
+            border-color: rgb(113, 155, 219)!important; /* Keeps the border green */
+        }
+        
+        .btn-outline-success:hover {
+            background-color:rgb(113, 155, 219)!important; /* Changes background color on hover */
+            color: white !important; /* Keeps button text white on hover */
+        }
+        footer h3 {
+    color: white;
+    font-size: 1.5rem; /* Reduced size */
+}
+
+footer {
+    background-color: #0039a6;
+    color: white;
+    padding: 15px 0; /* Reduced padding */
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    font-size: 0.875rem; /* Reduced font size */
+}
+
+.footer-links li {
+    display: inline;
+    margin: 0 10px; /* Reduced margin */
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.social-icons {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px; /* Reduced margin */
+}
+
+.social-icons li {
+    display: inline;
+    margin: 0 8px; /* Reduced margin */
+}
+
+.social-icons a {
+    display: inline-block;
+    width: 40px; /* Reduced size */
+    height: 40px; /* Reduced size */
+    border-radius: 50%;
+    background-color: white;
+    text-align: center;
+    line-height: 40px; /* Adjusted to match new size */
+    transition: background-color 0.3s ease;
+}
+
+.social-icons img {
+    width: 20px; /* Reduced size */
+    height: 20px; /* Reduced size */
+}
+
+.social-icons a:hover {
+    background-color: rgb(173, 170, 165);  /* Change to your desired hover color */
+}
+
+p {
+    font-size: 0.875rem; /* Reduced font size */
+    margin: 10px 0 0; /* Reduced margin */
+}
+
+
+
+
+
+@media (max-width: 768px) {
+
+   
+  
+    .form-inline {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    .form-inline .form-control {
+        width: 75%; /* Adjusts the width of the input field */
+    }
+
+    .form-inline .btn-outline-success {
+        width: 25%; /* Adjusts the width of the button */
+        margin-left: 5px;
+    }
+
+    .search-icon {
+        display: inline-block; /* Show on mobile screens */
+    }
+
+    /* Hide the search form by default on mobile */
+  
+    /* Show the search form when active (when the icon is clicked) */
+    .search-form.active {
+        display: flex;
+    }
+    .search-icon {
+    color: white;
+    font-size: 22px; /* Reduce font size slightly if needed */
+    margin-right: -120px; /* Move icon closer */
+    font-weight: 300; /* Lighter font weight */
+    cursor: pointer;
+    display: inline-block;
+    
+    
+}
+
+.search-icon img{
+   height:34px;
+   margin-bottom: 2px;
+   filter: invert(1) brightness(100%) sepia(0);
+}
+
+/* Footer adjustments */
+footer {
+        padding: 6px 0;
+    }
+
+    footer h3 {
+        font-size: 1.1rem;
+    }
+
+    .footer-links {
+        font-size: 0.7rem;
+    }
+
+    .social-icons a {
+        width: 35px;
+        height: 35px;
+        line-height: 30px;
+    }
+
+    .social-icons img {
+        width: 18px;
+        height: 18px;
+    }
+
+   footer p{
+        font-size: 12px;
+    }
+
+
+}
+
+   
+
+
+
+@media (max-width: 360px) {
+    /* Adjust search icon to be closer to the navbar toggler */
+    .search-icon {
+        font-size: 18px;
+        margin-right: -60px; /* Reduce margin to bring it even closer */
+        display: inline-block;
+        vertical-align: middle; /* Ensure vertical alignment with the toggle button */
+    }
+
+    .search-icon img {
+        height: 28px;
+        margin-right: -50px; /* Make the icon overlap more with the navbar toggle */
+        vertical-align: middle; /* Align the image vertically with the toggle button */
+    }
+
+    .navbar-toggler {
+        padding: 0.15rem 0.3rem;
+        margin-right: 10px; /* Remove as much space as possible between the toggle and search icon */
+    }
+
+    .navbar-toggler-icon {
+        font-size: 0.9rem;
+    }
+
+    /* Adjust search bar and button */
+    .form-inline .form-control {
+        width: 65%;
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    .form-inline .btn-outline-success {
+        width: 35%;
+        margin-left: 2px;
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    /* Navbar adjustments */
+    .navbar {
+        padding: 6px 8px;
+    }
+
+    .navbar-brand {
+        font-size: 1rem;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+
+    /* Footer adjustments */
+    footer {
+        padding: 6px 0;
+    }
+
+    footer h3 {
+        font-size: 0.9rem;
+    }
+
+    .footer-links {
+        font-size: 0.7rem;
+    }
+
+    .social-icons a {
+        width: 25px;
+        height: 25px;
+        line-height: 20px;
+    }
+
+    .social-icons img {
+        width: 14px;
+        height: 14px;
+    }
+
+    footer p{
+        font-size: 12px;
+    }
+}
+
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+    /* Your CSS styles for iPhone X go here */
+
+
+    .search-icon {
+        font-size: 18px;
+        margin-right: -60px; /* Reduce margin to bring it even closer */
+        display: inline-block;
+        vertical-align: middle; /* Ensure vertical alignment with the toggle button */
+    }
+
+    .search-icon img {
+        height: 28px;
+        margin-right: -50px; /* Make the icon overlap more with the navbar toggle */
+        vertical-align: middle; /* Align the image vertically with the toggle button */
+    }
+
+    .navbar-toggler {
+        padding: 0.15rem 0.3rem;
+        margin-right: 10px; /* Remove as much space as possible between the toggle and search icon */
+    }
+
+    .navbar-toggler-icon {
+        font-size: 0.9rem;
+    }
+
+    
+     /* Footer adjustments */
+     footer {
+        padding: 6px 0;
+    }
+
+    footer h3 {
+        font-size: 1.1rem;
+    }
+
+    .footer-links {
+        font-size: 0.7rem;
+    }
+
+    .social-icons a {
+        width: 35px;
+        height: 35px;
+        line-height: 30px;
+    }
+
+    .social-icons img {
+        width: 18px;
+        height: 18px;
+    }
+
+   footer p{
+        font-size: 12px;
+    }
+
+
+
+}
+
+
+@media only screen and (width: 375px) and (height: 667px) {
+    /* CSS rules for iPhone 6, 7, 8 */
+
+    .search-icon {
+        font-size: 18px;
+        margin-right: -60px; /* Reduce margin to bring it even closer */
+        display: inline-block;
+        vertical-align: middle; /* Ensure vertical alignment with the toggle button */
+    }
+
+    .search-icon img {
+        height: 28px;
+        margin-right: -50px; /* Make the icon overlap more with the navbar toggle */
+        vertical-align: middle; /* Align the image vertically with the toggle button */
+    }
+
+    .navbar-toggler {
+        padding: 0.15rem 0.3rem;
+        margin-right: 10px; /* Remove as much space as possible between the toggle and search icon */
+    }
+
+    .navbar-toggler-icon {
+        font-size: 0.9rem;
+    }
+
+}
+
+@media only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) {
+  /* Styles for iPhone 12 Pro */
+
+  .search-icon {
+        font-size: 18px;
+        margin-right: -60px; /* Reduce margin to bring it even closer */
+        display: inline-block;
+        vertical-align: middle; /* Ensure vertical alignment with the toggle button */
+    }
+
+    .search-icon img {
+        height: 28px;
+        margin-right: -50px; /* Make the icon overlap more with the navbar toggle */
+        vertical-align: middle; /* Align the image vertically with the toggle button */
+    }
+
+    .navbar-toggler {
+        padding: 0.15rem 0.3rem;
+        margin-right: 10px; /* Remove as much space as possible between the toggle and search icon */
+    }
+
+    .navbar-toggler-icon {
+        font-size: 0.9rem;
+    }
+
+     /* Footer adjustments */
+     footer {
+        padding: 6px 0;
+    }
+
+    footer h3 {
+        font-size: 1.1rem;
+    }
+
+    .footer-links {
+        font-size: 0.7rem;
+    }
+
+    .social-icons a {
+        width: 35px;
+        height: 35px;
+        line-height: 30px;
+    }
+
+    .social-icons img {
+        width: 18px;
+        height: 18px;
+    }
+
+   footer p{
+        font-size: 12px;
+    }
+
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-device-pixel-ratio: 2) {
+  /* Styles for iPads and similar devices with 2x pixel density */
+
+  .search-icon {
+        font-size: 18px;
+        margin-right: -450px; /* Reduce margin to bring it even closer */
+        display: inline-block;
+        vertical-align: middle; /* Ensure vertical alignment with the toggle button */
+    }
+
+    .search-icon img {
+        height: 28px;
+        margin-right: -50px; /* Make the icon overlap more with the navbar toggle */
+        vertical-align: middle; /* Align the image vertically with the toggle button */
+    }
+
+    .navbar-toggler {
+        padding: 0.15rem 0.3rem;
+        margin-right: 10px; /* Remove as much space as possible between the toggle and search icon */
+    }
+
+    .navbar-toggler-icon {
+        font-size: 0.9rem;
+    }
+     
+
+
+}
+
+@media only screen and (device-width: 375px) and (-webkit-device-pixel-ratio: 2) {
+    /* Styles for iPhone SE (2nd and 3rd Generations) */
+     
+     /* Footer adjustments */
+     footer {
+        padding: 6px 0;
+    }
+
+    footer h3 {
+        font-size: 1.1rem;
+    }
+
+    .footer-links {
+        font-size: 0.7rem;
+    }
+
+    .social-icons a {
+        width: 35px;
+        height: 35px;
+        line-height: 30px;
+    }
+
+    .social-icons img {
+        width: 18px;
+        height: 18px;
+    }
+
+   footer p{
+        font-size: 12px;
+    }
+
+}
+
+
+
+
+    </style>
+</head>
+<body>
+  
+    <nav class="navbar navbar-expand-lg navbar-dark bg-orange fixed-top">
+        <a class="navbar-brand" href="#">Autobazaar</a>
+         
+         <!-- Search icon for mobile view -->
+        
+         <span class="search-icon d-lg-none">
+            <img src="{% static 'images/search_logo_3.png' %}" alt="Search Icon" /> <!-- FontAwesome icon -->
+        </span>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/aboutus">About us</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{% url 'services' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       Services
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        
+                        <a class="dropdown-item" href="/detailing">Detailing</a>
+                        <a href="/PPF" class="dropdown-item">PPF</a>
+                       
+                        <a class="dropdown-item" href="/services">More services</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contactus">Contact us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/completegarage">Complete Garage</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0 ml-auto search-form" method="get" action="{% url 'search' %}">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search Car" aria-label="Search" name="q">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+    
+           
+
+            
+        </div>
+    </nav>
+    
+
+<div class="container">
+    <br>
+    {% block content %}
+    {% endblock content %}
+</div>
+
+
+
+
+<footer>
+    <div class="container text-center">
+        <h3>Follow Us on Social Media</h3>
+        <ul class="social-icons">
+            <li><a href="#"><img src="{% static 'images/footer/instagram.png' %}" alt="Instagram"></a></li>
+            <li><a href="#"><img src="{% static 'images/footer/facebook.png' %}" alt="facebook"></a></li>
+            <li><a href="#"><img src="{% static 'images/footer/gmail.png' %}" alt="gmail"></a></li>
+        </ul>
+        <ul class="footer-links">
+           <center> <li><a href="/termsandconditions">Terms and Conditions</a></li>
+            <li><a href="/privacypolicy">Privacy Policy</a></li></center>
+            
+        </ul>
+        <p>&copy; 2025 Autobazaar. All Rights Reserved.</p>
+    </div>
+</footer>
+
+
+
+
+<!-- jQuery and Bootstrap JS -->
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<!-- Your custom script -->
+<script>
+$(document).ready(function() {
+    // Click event for the search icon
+    $('.search-icon').on('click', function() {
+        console.log("Search icon clicked!");  // Debugging message
+
+        // If the navbar is collapsed (not expanded), expand it first
+        if (!$('.navbar-collapse').hasClass('show')) {
+            // Trigger the navbar to expand (open the collapse)
+            $('.navbar-toggler').click(); 
+        }
+
+        // Toggle the visibility of the search form
+        $('.search-form').toggleClass('active');
+
+        // If the search form is active, set focus on the input field
+        if ($('.search-form').hasClass('active')) {
+            $('.search-form .form-control').focus();  // Focus on the search input field
+        }
+    });
+
+    $(document).click(function(event) {
+        var clickover = $(event.target);
+        var _opened = $(".navbar-collapse").hasClass("show");
+
+        if (_opened && !clickover.closest('.navbar').length) {
+            $(".navbar-toggler").click();  // This will collapse the navbar
+        }
+    });
+});
+</script>
+
+
+
+</body>
+</html>
