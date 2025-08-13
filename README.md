@@ -56,18 +56,24 @@ pip install -r requirements.txt
 # 4. Run the development server
 python manage.py runserver
 
-<h3 align="center">🏠 Homepage</h3> <p align="center"> <img src="screenshots/homepage.png" alt="Homepage" width="800"/> </p>
+<h3 align="center">🏠 Homepage</h3> <p align="center"> <img src="screenshots/homepage1.jpg" alt="Homepage" width="800"/> </p>
+<p align="center"> <img src="screenshots/homepage2.jpg" alt="Homepage" width="800"/> </p>
 
-<h3 align="center">ℹ️ About Us Page</h3> <p align="center"> <img src="screenshots/about-us.png" alt="About Us" width="800"/> </p>
+<h3 align="center">ℹ️ About Us Page</h3> <p align="center"> <img src="screenshots/aboutus1.jpg" alt="About Us" width="800"/> </p>
+<p align="center"> <img src="screenshots/aboutus2.jpg" alt="About Us" width="800"/> </p>
 
-<h3 align="center">🚘 Complete Garage</h3> <p align="center"> <img src="screenshots/garage.png" alt="Garage" width="800"/> </p> 
+<h3 align="center">🚘 Complete Garage</h3> <p align="center"> <img src="screenshots/completegarage1.jpg" alt="Garage" width="800"/> </p> 
+<p align="center"> <img src="screenshots/completegarage2.jpg" alt="Garage" width="800"/> </p> 
   
-<h3 align="center">🆕 Add Car Page</h3> <p align="center"> <img src="screenshots/add-car.png" alt="Add Car" width="800"/> </p>
+<h3 align="center">📞 Contact Us</h3> <p align="center"> <img src="screenshots/contactus.jpg" alt="Contact Form" width="800"/> </p>
 
-<h3 align="center">📞 Contact Form</h3> <p align="center"> <img src="screenshots/contact-form.png" alt="Contact Form" width="800"/> </p>
+<h3 align="center">📅 Appointment Form</h3> <p align="center"> <img src="screenshots/appointment.jpg" alt="Appointment Form" width="800"/> </p>
 
-<h3 align="center">📅 Appointment Form</h3> <p align="center"> <img src="screenshots/appointment-form.png" alt="Appointment Form" width="800"/> </p>
+<h3 align="center">🛠 Services Page</h3> <p align="center"> <img src="screenshots/services1.jpg" alt="Services" width="800"/> </p> 
+<p align="center"> <img src="screenshots/services2.jpg" alt="Services" width="800"/> </p> 
 
-<h3 align="center">🛠 Services Page</h3> <p align="center"> <img src="screenshots/services.png" alt="Services" width="800"/> </p> 
+<h3 align="center">🆕 Add Car Page</h3> <p align="center"> <img src="screenshots/addcar1.jpg" alt="Add Car" width="800"/> </p>
+<p align="center"> <img src="screenshots/addcar1.jpg" alt="Add Car" width="800"/> </p>
 
-<h3 align="center">🗄 Database View</h3> <p align="center"> <img src="screenshots/database.png" alt="Database" width="800"/> </p>
+<h3 align="center">🗄 Database View</h3> <p align="center"> <img src="screenshots/database1.jpg" alt="Database" width="800"/> </p>
+<p align="center"> <img src="screenshots/database2.jpg" alt="Database" width="800"/> </p>
